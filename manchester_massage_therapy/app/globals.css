@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blue100: #004a52;
+  --blue200: #00c8cb;
+  --blue300: #92f6ff;
+  --blue400: #c2ffff;
+  --blue500: #e7ffff;
+  --grey100: #181818;
+  --grey200: #262626;
+  --grey300: #4d4d4d;
+  --grey400: #7f7f7f;
+  --grey500: #c9c9c9;
+  --grey600: #e3e3e3;
+  --yellow200: #fcff64;
+  --yellow300: #fdffa7;
+
+  --logo-rgb: var(--blue200);
+  --logo-color: var(--blue200);
+  --text-booking-button-color: black;
+
+  --bg-primary-color: var(--grey600);
+  --bg-secondary-color: var(--grey500);
+  --bg-accent-color: var(--blue500);
+  --bg-menu-color: white;
+  --bg-booking-button-idle-color: var(--yellow300);
+  --bg-booking-button-hover-color: var(--yellow200);
+  --image-filter-color: rgba(255, 255, 255, 0.1);
+
+  --text-primary-color: black;
+  --text-secondary-color: #606060;
+  --text-accent-color: var(--blue100);
+  --text-menu-color: var(--blue100);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary-color: var(--grey100);
+    --bg-secondary-color: var(--grey200);
+    --bg-accent-color: var(--blue100);
+    --bg-menu-color: black;
+    --bg-booking-button-idle-color: var(--yellow200);
+    --bg-booking-button-hover-color: var(--yellow300);
+    --image-filter-color: rgba(0, 0, 0, 0.2);
+
+    --text-primary-color: white;
+    --text-secondary-color: #dddddd;
+    --text-accent-color: var(--blue200);
+    --text-menu-color: var(--blue200);
+  }
+}
+
+body {
+  color: var(--text-primary-color);
+  background-color: var(--primary-bg);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+.embla__container {
+  height: 100%;
+}
+
+.embla__slide {
+  margin: 1em;
+}
+
+.overlay-filter {
+  position: absolute;
+  top: 0%;
+  pointer-events: none;
+}
+
+.fade-y-mirror {
+  background: linear-gradient(
+    0deg,
+    var(--bg-primary-color) 5%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 75%,
+    var(--bg-primary-color) 85%
+  );
+}
+
+.splash-filter {
+  background: var(--image-filter-color);
+  top: 0%;
+  pointer-events: none;
+}
+
+.fade-to-footer {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 80%,
+    var(--bg-menu-color) 100%
+  )
+}
