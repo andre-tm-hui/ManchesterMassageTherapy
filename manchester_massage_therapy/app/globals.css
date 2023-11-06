@@ -101,9 +101,27 @@ h4 {
 
 .fade-to-footer {
   background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 80%,
-    var(--bg-menu-color) 100%
-  )
+    0deg,
+    var(--bg-menu-color) 0%,
+    rgba(0, 0, 0, 0) 10rem,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.instagram-fade {
+  background: linear-gradient(
+    0deg,
+    black 0rem,
+    black 2rem,
+    rgba(0, 0, 0, 0) 12rem,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.overlay-button {
+  position: absolute;
+  display: block;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

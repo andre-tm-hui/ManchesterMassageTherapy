@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Logo from '../../shared/Logo';
+import InstagramLogo from '@/public/assets/icons/instagram.svg';
 
 export default function Footer() {
   interface FooterItemProps {
@@ -63,7 +64,14 @@ export default function Footer() {
           <div className='m-auto w-1/2 text-center'>
             Copyright © 2023 Manchester Massage Therapy
           </div>
-          <div className='my-auto'>Goodbye</div>
+          <div className='my-auto'>
+            <a
+              className='text-logo saturate-50 transition-all duration-100 hover:saturate-100'
+              href='https://www.instagram.com/manchester_massage_therapy/'
+            >
+              <InstagramLogo width={'2rem'} height={'2rem'} />
+            </a>
+          </div>
         </div>
       </div>
     </div>

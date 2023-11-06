@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'scontent-lhr8-2.cdninstagram.com',
+      }
+    ]
+  }
+};
 
 (nextConfig.webpack = (config, context) => {
   config.module.rules.push({
