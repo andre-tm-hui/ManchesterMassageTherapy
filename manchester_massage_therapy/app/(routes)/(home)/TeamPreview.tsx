@@ -17,7 +17,9 @@ export default function TeamPreview() {
             Meet the Team!
           </h1>
           <p>Trained professionals, keeping your needs a priority.</p>
-          <PillButton classNames='py-4 w-48 m-auto'>See everyone!</PillButton>
+          <PillButton href='/team' classNames='py-4 w-48 m-auto'>
+            See everyone!
+          </PillButton>
         </div>
         <Carousel
           classNames='md:w-[48vw] w-screen mx-0 block'

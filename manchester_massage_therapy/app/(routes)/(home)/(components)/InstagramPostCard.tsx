@@ -11,7 +11,7 @@ interface InstagramPostCardProps {
 export default function InstagramPostCard({ post }: InstagramPostCardProps) {
   return (
     <div
-      className='duration-10 relative h-auto w-full bg-black text-gray-500 shadow-xl saturate-50 transition-all hover:scale-[101%] hover:text-gray-200 hover:saturate-100'
+      className='relative mb-4 bg-black text-gray-500 shadow-xl saturate-50 transition-all duration-100 hover:scale-[101%] hover:text-gray-200 hover:saturate-100'
       style={{ aspectRatio: post.prefAspectRatio }}
     >
       <ConditionalWrapper
@@ -37,10 +37,13 @@ export default function InstagramPostCard({ post }: InstagramPostCardProps) {
           </p>
         </div>
         <p className='mt-auto h-4 basis-1/2 text-xs'>{post.uploadDate}</p>
-        <div className='ml-auto h-6 text-logo'>
+        <a
+          className='ml-auto h-6 text-logo'
+          href={post.postUrl}
+          target={'_blank'}
+        >
           <InstagramLogo width={'1.5rem'} height={'1.5rem'} />
-        </div>
-        {/* insert instagram logo here */}
+        </a>
       </div>
     </div>
   );

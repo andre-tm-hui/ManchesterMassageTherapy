@@ -68,6 +68,7 @@ export default function Footer() {
             <a
               className='text-logo saturate-50 transition-all duration-100 hover:saturate-100'
               href='https://www.instagram.com/manchester_massage_therapy/'
+              target={'_blank'}
             >
               <InstagramLogo width={'2rem'} height={'2rem'} />
             </a>

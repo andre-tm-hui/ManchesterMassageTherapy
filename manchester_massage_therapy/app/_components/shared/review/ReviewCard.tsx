@@ -14,11 +14,7 @@ export default function ReviewCard({ review, classNames }: ReviewCardProps) {
         classNames ?? ''
       }`}
     >
-      {' '}
-      {/* main body - rows */}
       <div className='flex bg-secondary px-5 py-3'>
-        {' '}
-        {/* header group - columns */}
         <Image
           className='rounded-full'
           width={'48'}
@@ -26,7 +22,6 @@ export default function ReviewCard({ review, classNames }: ReviewCardProps) {
           src={review.reviewer.profilePhotoUrl}
           alt={'/blankProfile.jpg'}
         />{' '}
-        {/* reviewer icon */}
         <div className='space-2 ml-4 flex flex-col text-left'>
           <p className='text-xl'>
             {review.reviewer.isAnonymous
@@ -38,7 +33,7 @@ export default function ReviewCard({ review, classNames }: ReviewCardProps) {
         <StarRating className='ml-auto' rating={review.starRating} />
       </div>
       <div className='flex h-40 flex-col'>
-        <p className='my-auto px-20 py-2 text-center'>{review.comment}</p>
+        <p className='my-auto px-12 py-2 text-center'>{review.comment}</p>
       </div>
     </div>
   );

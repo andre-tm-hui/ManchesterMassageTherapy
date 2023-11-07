@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface PillProps {
   classNames?: string;
   href?: string;
@@ -9,14 +11,16 @@ export default function PillButton({
   href = '',
   children,
 }: PillProps) {
+  const wrapper = href.startsWith('/') ? <Link href='' /> : <a />;
+
   return (
-    <a
+    <wrapper.type
       className={`${classNames} bg-booking-button rounded-full bg-bookingButtonIdle font-bold font-bold text-bookingButton text-bookingButton transition-all ease-linear hover:bg-bookingButtonHover`}
       href={href}
-      target={'_blank'}
+      target={href.startsWith('/') ? '' : '_blank'}
       rel={'noreferrer'}
     >
       {children}
-    </a>
+    </wrapper.type>
   );
 }
