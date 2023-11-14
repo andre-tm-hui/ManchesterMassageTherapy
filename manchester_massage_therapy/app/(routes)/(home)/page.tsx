@@ -3,6 +3,7 @@ import Reviews from './Reviews';
 import HowItWorks from './HowItWorks';
 import TeamPreview from './TeamPreview';
 import InstagramFeed from './InstagramFeed';
+import Services from './Services';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Reviews />
       <HowItWorks />
       <TeamPreview />
+      <Services />
       <InstagramFeed />
     </main>
   );
