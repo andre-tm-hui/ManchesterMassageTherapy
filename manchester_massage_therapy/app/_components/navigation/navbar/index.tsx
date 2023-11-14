@@ -65,7 +65,7 @@ export default function Navbar() {
               <BookingButton classNames='w-40 px-6 py-3'></BookingButton>
             </li>
           </ul>
-          <button className='ml-auto text-menu transition-all duration-200 hover:brightness-125 md:hidden'>
+          <button className='ml-auto text-logo transition-all duration-200 hover:brightness-125 md:hidden'>
             <BurgerMenu width={'40px'} height={'40px'} />
           </button>
         </div>

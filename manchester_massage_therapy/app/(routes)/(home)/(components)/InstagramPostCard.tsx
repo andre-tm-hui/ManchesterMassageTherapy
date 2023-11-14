@@ -11,9 +11,10 @@ interface InstagramPostCardProps {
 export default function InstagramPostCard({ post }: InstagramPostCardProps) {
   return (
     <div
-      className='relative mb-4 bg-black text-gray-500 shadow-xl saturate-50 transition-all duration-100 hover:scale-[101%] hover:text-gray-200 hover:saturate-100'
+      className='shadow-card relative mb-4 bg-black text-gray-200 shadow-md transition-all duration-100 hover:scale-[101%] hover:text-gray-200 hover:saturate-100 md:text-gray-500 md:saturate-50'
       style={{ aspectRatio: post.prefAspectRatio }}
     >
+      {/** TODO: make sure this works with multiple images - implement navigation buttons/dots */}
       <ConditionalWrapper
         condition={post.imageUrls.length > 1}
         wrapper={(children) => <Carousel>{children}</Carousel>}

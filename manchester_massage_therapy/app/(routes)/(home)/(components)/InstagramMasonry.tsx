@@ -16,16 +16,16 @@ export default function InstagramMasonry() {
   return (
     <Masonry
       breakpointCols={breakpointColsObj}
-      className='masonry py-16 md:py-12'
+      className='masonry py-8 md:py-16'
       columnClassName='masonry-column'
     >
       <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
+      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
       <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
       <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
       <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
       <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
     </Masonry>
   );

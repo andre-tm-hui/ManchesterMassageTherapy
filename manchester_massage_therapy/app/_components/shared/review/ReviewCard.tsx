@@ -10,7 +10,7 @@ interface ReviewCardProps {
 export default function ReviewCard({ review, classNames }: ReviewCardProps) {
   return (
     <div
-      className={`embla__slide flex flex-col overflow-hidden rounded-3xl bg-menu shadow-md ${
+      className={`embla__slide shadow-card flex flex-col overflow-hidden rounded-3xl bg-menu shadow-lg ${
         classNames ?? ''
       }`}
     >

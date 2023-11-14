@@ -15,7 +15,7 @@ export default function BGImageDiv({
         style={{ backgroundImage: `url(${src})` }}
         className={`h-full w-full overflow-hidden bg-cover`}
       />
-      <div className={`splash-filter overlay-filter ${className}`}>
+      <div className={`bg-imageFilter overlay-filter ${className}`}>
         {children}
       </div>
     </div>

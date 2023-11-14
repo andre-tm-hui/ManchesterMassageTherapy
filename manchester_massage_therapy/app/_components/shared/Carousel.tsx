@@ -4,7 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 interface CarouselProps {
-  classNames?: undefined | string;
+  className?: undefined | string;
   autoplay?: undefined | boolean;
   axis?: undefined | 'x' | 'y';
   loop?: undefined | boolean;
@@ -13,7 +13,7 @@ interface CarouselProps {
 }
 
 export default function Carousel({
-  classNames,
+  className,
   autoplay,
   axis,
   loop,
@@ -28,7 +28,7 @@ export default function Carousel({
     <div
       className={`embla ${
         showOverflow ? 'overflow-visible' : 'overflow-hidden'
-      } ${classNames ?? ''}`}
+      } ${className ?? ''}`}
       ref={emblaRef}
     >
       <div

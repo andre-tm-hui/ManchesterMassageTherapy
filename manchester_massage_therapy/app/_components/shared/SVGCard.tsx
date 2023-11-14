@@ -5,6 +5,7 @@ interface StepCardProps {
   header: string;
   desc: string;
   children?: undefined | JSX.Element;
+  color?: undefined | string;
 }
 
 export default function SVGCard({
@@ -12,13 +13,16 @@ export default function SVGCard({
   header,
   desc,
   children,
+  color,
 }: StepCardProps) {
   return (
-    <div className='mx-auto flex w-60 flex-col space-y-1 lg:w-72'>
-      <div className='mx-auto'>
-        <stepSvg.type margin={'auto'} width={'14rem'} height={'14rem'} />
+    <div className='mb-auto flex w-full max-w-xs flex-col space-y-1 sm:w-1/3 md:m-0 md:w-1/4'>
+      <div className={`${color ?? ''} mx-auto`}>
+        <stepSvg.type margin={'auto'} width={'100%'} height={'100%'} />
       </div>
-      <h3 className={`text-2xl ${chelseaMarket.className}`}>{header}</h3>
+      <h3 className={`text-2xl ${chelseaMarket.className} text-secondary`}>
+        {header}
+      </h3>
       <p className='text-lg'>{desc}</p>
       {children}
     </div>
