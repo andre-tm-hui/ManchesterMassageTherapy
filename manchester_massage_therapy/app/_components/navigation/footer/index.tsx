@@ -23,8 +23,8 @@ export default function Footer() {
   return (
     <div className='w-full bg-menu text-sm text-secondary'>
       <div className='mx-auto w-[90%] max-w-7xl lg:w-4/5'>
-        <div className='my-auto w-full max-w-5xl py-8'>
-          <table className='h-full w-full table-fixed lg:w-4/5'>
+        <div className='my-auto w-full max-w-5xl pb-8 md:pt-8'>
+          <table className='hidden h-full w-full table-fixed md:table lg:w-4/5'>
             <thead className='pb-8 text-left align-top text-primary'>
               <tr>
                 <th>About MMT</th>
@@ -41,7 +41,7 @@ export default function Footer() {
               </tr>
               <tr>
                 <FooterItem href='/services'>Services</FooterItem>
-                <FooterItem href='/team'>Business Inquiries</FooterItem>
+                <FooterItem href='/contact'>Business Inquiries</FooterItem>
                 <FooterItem href='/contact'>Contact Us</FooterItem>
               </tr>
               <tr>
@@ -54,6 +54,66 @@ export default function Footer() {
               </tr>
               <tr>
                 <FooterItem href='/legal'>Legal</FooterItem>
+              </tr>
+            </tbody>
+          </table>
+          <table className='h-full w-full md:hidden'>
+            <thead className='pb-8 text-left align-top text-primary'>
+              <tr>
+                <th>About MMT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className='h-6'></tr>
+              <tr>
+                <FooterItem href='./'>Home</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/services'>Services</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/team'>Meet the Team</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/safety'>Safety</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/legal'>Legal</FooterItem>
+              </tr>
+            </tbody>
+          </table>
+          <table className='mt-8 h-full w-full md:hidden'>
+            <thead className='pb-8 text-left align-top text-primary'>
+              <tr>
+                <th>Interested in Helping?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className='h-6'></tr>
+              <tr>
+                <FooterItem href='/careers'>Join the Team</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/contact'>Business Inquiries</FooterItem>
+              </tr>
+            </tbody>
+          </table>
+          <table className='mt-8 h-full w-full md:hidden'>
+            <thead className='pb-8 text-left align-top text-primary'>
+              <tr>
+                <th>Need Help?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className='h-6'></tr>
+              <tr>
+                <FooterItem href='/faq'>FAQ</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/contact'>Contact Us</FooterItem>
+              </tr>
+              <tr>
+                <FooterItem href='/sitemap'>Sitemap</FooterItem>
               </tr>
             </tbody>
           </table>
