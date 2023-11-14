@@ -16,6 +16,7 @@ const config: Config = {
         bookingButtonIdle: 'var(--bg-booking-button-idle-color)',
         bookingButtonHover: 'var(--bg-booking-button-hover-color)',
         dividerLine: '#B0B0B0',
+        imageFilter: 'var(--image-filter-color)'
       },
       textColor: {
         primary: 'var(--text-primary-color)',
@@ -24,7 +25,11 @@ const config: Config = {
         menu: 'var(--text-menu-color)',
         logo: 'var(--logo-color)',
         bookingButton: 'var(--text-booking-button-color)',
+        svg: 'var(--text-svg-color)',
       },
+      boxShadowColor: {
+        card: 'var(--shadow-card-color)'
+      }
     },
   },
   plugins: [],
