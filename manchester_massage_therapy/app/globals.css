@@ -19,7 +19,6 @@
 
   --logo-rgb: var(--blue200);
   --logo-color: var(--blue200);
-  --text-booking-button-color: black;
 
   --bg-primary-color: var(--grey600);
   --bg-secondary-color: var(--grey500);
@@ -30,9 +29,13 @@
   --image-filter-color: rgba(255, 255, 255, 0.1);
 
   --text-primary-color: black;
-  --text-secondary-color: #606060;
+  --text-secondary-color: var(--grey300);
   --text-accent-color: var(--blue100);
   --text-menu-color: var(--blue100);
+  --text-svg-color: black;
+  --text-booking-button-color: var(--grey300);
+
+  --shadow-card-color: rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,27 +49,19 @@
     --image-filter-color: rgba(0, 0, 0, 0.2);
 
     --text-primary-color: white;
-    --text-secondary-color: #dddddd;
+    --text-secondary-color: white;
     --text-accent-color: var(--blue200);
     --text-menu-color: var(--blue200);
+    --text-svg-color: var(--blue300);
+    --text-booking-button-color: black;
+
+    --shadow-card-color: rgba(120, 120, 120, 0.1);
   }
 }
 
 body {
   color: var(--text-primary-color);
   background-color: var(--primary-bg);
-}
-
-h1 {
-  font-size: 4rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.5rem;
 }
 
 .embla__container {
@@ -83,31 +78,6 @@ h4 {
   pointer-events: none;
 }
 
-.fade-y-mirror {
-  background: linear-gradient(
-    0deg,
-    var(--bg-primary-color) 5%,
-    rgba(0, 0, 0, 0) 25%,
-    rgba(0, 0, 0, 0) 75%,
-    var(--bg-primary-color) 85%
-  );
-}
-
-.splash-filter {
-  background: var(--image-filter-color);
-  top: 0%;
-  pointer-events: none;
-}
-
-.fade-to-footer {
-  background: linear-gradient(
-    0deg,
-    var(--bg-menu-color) 0%,
-    rgba(0, 0, 0, 0) 10rem,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-
 .instagram-fade {
   background: linear-gradient(
     0deg,
@@ -121,7 +91,7 @@ h4 {
 .overlay-button {
   position: absolute;
   display: block;
-  top: 95%;
+  bottom: 2rem;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -134,6 +104,5 @@ h4 {
 
 .masonry-column {
   padding-left: 1rem;
-  /* gutter size */
   background-clip: padding-box;
 }
