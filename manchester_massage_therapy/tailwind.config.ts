@@ -26,6 +26,7 @@ const config: Config = {
         logo: 'var(--logo-color)',
         bookingButton: 'var(--text-booking-button-color)',
         svg: 'var(--text-svg-color)',
+        hyperlink: 'var(--text-hyperlink-color)'
       },
       boxShadowColor: {
         card: 'var(--shadow-card-color)'

@@ -34,6 +34,7 @@
   --text-menu-color: var(--blue100);
   --text-svg-color: black;
   --text-booking-button-color: var(--grey300);
+  --text-hyperlink-color: var(--blue200);
 
   --shadow-card-color: rgba(0, 0, 0, 0.1);
 }
@@ -54,6 +55,7 @@
     --text-menu-color: var(--blue200);
     --text-svg-color: var(--blue300);
     --text-booking-button-color: black;
+    --text-hyperlink-color: var(--blue300);
 
     --shadow-card-color: rgba(120, 120, 120, 0.1);
   }
