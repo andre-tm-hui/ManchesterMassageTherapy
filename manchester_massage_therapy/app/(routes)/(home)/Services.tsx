@@ -4,8 +4,7 @@ import Overlay from '@/app/_components/shared/Overlay';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import TreatmentCard from './(components)/TreatmentCard';
-import { MouseEventHandler, useState } from 'react';
-import { BrowserView, MobileView } from 'react-device-detect';
+import { useState } from 'react';
 import Carousel from '@/app/_components/shared/Carousel';
 
 export default function Services() {

@@ -1,6 +1,5 @@
 import { ComponentProps } from 'react';
 import PillButton from './PillButton';
-import { LinkProps } from 'next/link';
 
 export default function BookingButton(props: ComponentProps<'a'>) {
   return (

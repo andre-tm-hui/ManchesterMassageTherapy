@@ -4,7 +4,6 @@ import IMasseuseData, {
 import MasseuseCard from './(components)/MasseuseCard';
 import { chelseaMarket } from '@/app/fonts';
 import Carousel from '@/app/_components/shared/Carousel';
-import PillButton from '@/app/_components/shared/PillButton';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 import ArrowSVG from '../../../public/arrow.svg';

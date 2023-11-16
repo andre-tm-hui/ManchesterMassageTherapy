@@ -1,4 +1,3 @@
-import BGImageDiv from '@/app/_components/shared/BGImageDiv';
 import { chelseaMarket } from '@/app/fonts';
 import Image from 'next/image';
 import { ComponentProps, MouseEventHandler } from 'react';

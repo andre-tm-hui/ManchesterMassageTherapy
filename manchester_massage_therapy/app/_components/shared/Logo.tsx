@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import ConditionalWrapper from './ConditionalWrapper';
 import MmtLogo from '../../../public/mmtLogo.svg';

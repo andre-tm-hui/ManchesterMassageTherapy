@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 
 export default function Overlay({ className, style }: ComponentProps<'div'>) {
   return (

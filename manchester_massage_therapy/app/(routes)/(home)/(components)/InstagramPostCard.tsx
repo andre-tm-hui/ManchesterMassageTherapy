@@ -4,10 +4,6 @@ import Carousel from '@/app/_components/shared/Carousel';
 import Image from 'next/image';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 
-interface InstagramPostCardProps {
-  post: IInstagramPost;
-}
-
 export default function InstagramPostCard({
   prefAspectRatio,
   imageUrls,

@@ -3,10 +3,6 @@ import IReviewData from '@/app/_types/review/Review';
 import StarRating from './StarRating';
 import { ComponentProps } from 'react';
 
-interface ReviewCardProps extends ComponentProps<'div'> {
-  review: IReviewData;
-}
-
 export default function ReviewCard({
   reviewer,
   createTime,
