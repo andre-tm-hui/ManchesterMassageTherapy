@@ -1,11 +1,6 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ComponentProps } from 'react';
 
-interface OverlayProps {
-  className?: undefined | string;
-  style?: undefined | CSSProperties;
-}
-
-export default function Overlay({ className, style }: OverlayProps) {
+export default function Overlay({ className, style }: ComponentProps<'div'>) {
   return (
     <div
       className={`overlay-filter h-full w-full ${className}`}

@@ -1,26 +1,24 @@
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
+import { ComponentProps } from 'react';
 
-interface PillProps {
-  classNames?: string;
-  href?: string;
-  children?: JSX.Element | JSX.Element[] | string;
-}
-
-export default function PillButton({
-  classNames,
-  href = '',
-  children,
-}: PillProps) {
-  const wrapper = href.startsWith('/') ? <Link href='' /> : <a />;
+export default function PillButton(
+  props: ComponentProps<'a'> | (LinkProps & ComponentProps<'div'>)
+) {
+  const href = props.href ?? '.';
+  const isInternalRoute = (
+    typeof href === 'string' ? href : href.toString()
+  ).startsWith('/');
+  const wrapper = isInternalRoute ? <Link href='' /> : <a />;
 
   return (
     <wrapper.type
-      className={`${classNames} bg-booking-button rounded-full bg-bookingButtonIdle font-bold font-bold text-bookingButton text-bookingButton transition-all ease-linear hover:bg-bookingButtonHover`}
+      {...props}
+      className={`${props.className} bg-booking-button rounded-full bg-bookingButtonIdle font-bold font-bold text-bookingButton text-bookingButton transition-all ease-linear hover:bg-bookingButtonHover`}
       href={href}
-      target={href.startsWith('/') ? '' : '_blank'}
+      target={isInternalRoute ? '' : '_blank'}
       rel={'noreferrer'}
     >
-      {children}
+      {props.children}
     </wrapper.type>
   );
 }

@@ -1,16 +1,14 @@
 import BGImageDiv from '@/app/_components/shared/BGImageDiv';
 import { chelseaMarket } from '@/app/fonts';
 import Image from 'next/image';
-import { MouseEventHandler } from 'react';
+import { ComponentProps, MouseEventHandler } from 'react';
 import { isMobile } from 'react-device-detect';
 
-interface TreatmentCardProps {
-  className?: undefined | string;
+interface TreatmentCardProps extends ComponentProps<'div'> {
   title: string;
   description: string;
   bookingUrl: string;
   flipped?: undefined | boolean;
-  onClick?: undefined | MouseEventHandler<HTMLDivElement>;
 }
 
 export default function TreatmentCard({

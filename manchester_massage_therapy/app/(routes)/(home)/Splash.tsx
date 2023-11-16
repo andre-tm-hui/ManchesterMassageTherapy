@@ -17,7 +17,7 @@ export default function Splash() {
           <br />
           Lorem ipsum something something...
         </h4>
-        <BookingButton classNames='w-40 mx-auto my-5 px-6 py-3' />
+        <BookingButton className='z-10 mx-auto my-5 w-40 px-6 py-3' />
       </div>
     </BGImageDiv>
   );

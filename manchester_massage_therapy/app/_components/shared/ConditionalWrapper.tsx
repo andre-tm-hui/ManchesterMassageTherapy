@@ -1,7 +1,8 @@
-interface ConditionalWrapperProps {
+import { ComponentProps, ReactNode } from 'react';
+
+interface ConditionalWrapperProps extends ComponentProps<'div'> {
   condition: boolean;
-  wrapper: (children: JSX.Element | JSX.Element[]) => JSX.Element;
-  children: JSX.Element | JSX.Element[];
+  wrapper: (children: ReactNode) => ReactNode;
 }
 export default function ConditionalWrapper({
   condition,

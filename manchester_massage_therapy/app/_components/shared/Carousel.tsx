@@ -2,14 +2,13 @@
 
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { ComponentProps } from 'react';
 
-interface CarouselProps {
-  className?: undefined | string;
+interface CarouselProps extends ComponentProps<'div'> {
   autoplay?: undefined | boolean;
   axis?: undefined | 'x' | 'y';
   loop?: undefined | boolean;
   showOverflow?: undefined | boolean;
-  children?: undefined | JSX.Element | JSX.Element[];
 }
 
 export default function Carousel({

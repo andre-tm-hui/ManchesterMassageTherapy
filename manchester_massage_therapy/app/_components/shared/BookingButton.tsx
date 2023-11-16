@@ -1,9 +1,11 @@
+import { ComponentProps } from 'react';
 import PillButton from './PillButton';
+import { LinkProps } from 'next/link';
 
-interface BookingButtonProps {
-  classNames: string;
-}
-
-export default function BookingButton({ classNames }: BookingButtonProps) {
-  return <PillButton classNames={`${classNames}`}>Book me in!</PillButton>;
+export default function BookingButton(props: ComponentProps<'a'>) {
+  return (
+    <PillButton href='https://booking.com' {...props}>
+      Book me in!
+    </PillButton>
+  );
 }

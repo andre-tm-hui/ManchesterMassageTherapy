@@ -1,10 +1,10 @@
 import { chelseaMarket } from '@/app/fonts';
+import { ComponentProps } from 'react';
 
-interface StepCardProps {
+interface StepCardProps extends ComponentProps<'div'> {
   stepSvg: JSX.Element;
   header: string;
   desc: string;
-  children?: undefined | JSX.Element;
   color?: undefined | string;
 }
 

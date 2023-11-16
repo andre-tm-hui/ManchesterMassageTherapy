@@ -1,6 +1,7 @@
-interface StarRatingProps {
+import { ComponentProps } from 'react';
+
+interface StarRatingProps extends ComponentProps<'div'> {
   rating: number;
-  className?: string | undefined;
 }
 
 export default function StarRating({ rating, className }: StarRatingProps) {

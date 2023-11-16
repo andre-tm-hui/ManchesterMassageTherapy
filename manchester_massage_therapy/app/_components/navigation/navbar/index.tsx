@@ -62,7 +62,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className='ml-auto'>
-              <BookingButton classNames='w-40 px-6 py-3'></BookingButton>
+              <BookingButton className='w-40 px-6 py-3'></BookingButton>
             </li>
           </ul>
           <button className='ml-auto text-logo transition-all duration-200 hover:brightness-125 md:hidden'>

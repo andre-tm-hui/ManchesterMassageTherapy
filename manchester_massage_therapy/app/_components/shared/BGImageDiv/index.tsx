@@ -1,21 +1,20 @@
-interface BGImageDivProps {
-  src: string;
-  className?: string;
-  children: JSX.Element | JSX.Element[];
-}
+import { ComponentProps } from 'react';
 
 export default function BGImageDiv({
   src,
   className,
   children,
-}: BGImageDivProps) {
+}: ComponentProps<'img'>) {
   return (
     <div className='h-screen w-full'>
       <div
         style={{ backgroundImage: `url(${src})` }}
         className={`h-full w-full overflow-hidden bg-cover`}
       />
-      <div className={`bg-imageFilter overlay-filter ${className}`}>
+      <div
+        className={`overlay-filter bg-imageFilter ${className}`}
+        style={{ pointerEvents: 'all' }}
+      >
         {children}
       </div>
     </div>

@@ -1,14 +1,10 @@
+import { ComponentProps } from 'react';
 import Section from '.';
-
-interface PrimarySectionProps {
-  className?: undefined | string;
-  children?: undefined | JSX.Element | JSX.Element[];
-}
 
 export default function PrimarySection({
   className,
   children,
-}: PrimarySectionProps) {
+}: ComponentProps<'div'>) {
   return (
     <Section className={`bg-primary ${className ?? ''}`}>{children}</Section>
   );

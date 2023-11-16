@@ -1,13 +1,10 @@
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
 import Logo from '../../shared/Logo';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
+import { ComponentProps } from 'react';
 
 export default function Footer() {
-  interface FooterItemProps {
-    href?: string;
-    children?: JSX.Element | JSX.Element[] | string;
-  }
-  function FooterItem({ href, children }: FooterItemProps) {
+  function FooterItem({ href, children }: LinkProps & ComponentProps<'div'>) {
     return (
       <td>
         <Link

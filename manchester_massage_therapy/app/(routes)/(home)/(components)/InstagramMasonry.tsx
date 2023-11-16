@@ -19,14 +19,14 @@ export default function InstagramMasonry() {
       className='masonry py-8 md:py-16'
       columnClassName='masonry-column'
     >
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard post={altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
+      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
     </Masonry>
   );
 }

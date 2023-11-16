@@ -45,7 +45,7 @@ export default function HowItWorks() {
           color='text-svg'
         />
       </div>
-      <BookingButton classNames='w-52 mx-auto my-5 px-6 py-3' />
+      <BookingButton className='mx-auto my-5 w-52 px-6 py-3' />
     </AccentSection>
   );
 }

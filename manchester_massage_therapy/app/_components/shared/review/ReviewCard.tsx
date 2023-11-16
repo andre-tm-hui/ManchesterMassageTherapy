@@ -1,17 +1,23 @@
 import Image from 'next/image';
 import IReviewData from '@/app/_types/review/Review';
 import StarRating from './StarRating';
+import { ComponentProps } from 'react';
 
-interface ReviewCardProps {
+interface ReviewCardProps extends ComponentProps<'div'> {
   review: IReviewData;
-  classNames?: undefined | string;
 }
 
-export default function ReviewCard({ review, classNames }: ReviewCardProps) {
+export default function ReviewCard({
+  reviewer,
+  createTime,
+  starRating,
+  comment,
+  className,
+}: IReviewData & ComponentProps<'div'>) {
   return (
     <div
-      className={`embla__slide shadow-card flex flex-col overflow-hidden rounded-3xl bg-menu shadow-lg ${
-        classNames ?? ''
+      className={`embla__slide flex flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card ${
+        className ?? ''
       }`}
     >
       <div className='flex bg-secondary px-5 py-3'>
@@ -19,21 +25,19 @@ export default function ReviewCard({ review, classNames }: ReviewCardProps) {
           className='rounded-full'
           width={'48'}
           height={'48'}
-          src={review.reviewer.profilePhotoUrl}
+          src={reviewer.profilePhotoUrl}
           alt={'/blankProfile.jpg'}
         />{' '}
         <div className='space-2 ml-4 flex flex-col text-left'>
           <p className='text-xl'>
-            {review.reviewer.isAnonymous
-              ? 'Anonymous User'
-              : review.reviewer.displayName}
+            {reviewer.isAnonymous ? 'Anonymous User' : reviewer.displayName}
           </p>
-          <p className='text-sm'>{review.createTime}</p>
+          <p className='text-sm'>{createTime}</p>
         </div>
-        <StarRating className='ml-auto' rating={review.starRating} />
+        <StarRating className='ml-auto' rating={starRating} />
       </div>
       <div className='flex h-40 flex-col'>
-        <p className='my-auto px-12 py-2 text-center'>{review.comment}</p>
+        <p className='my-auto px-12 py-2 text-center'>{comment}</p>
       </div>
     </div>
   );

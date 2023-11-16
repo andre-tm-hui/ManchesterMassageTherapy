@@ -9,9 +9,9 @@ export default function Reviews() {
   const googleReviews = defaultReviews.reviews.map((review, _) => {
     return (
       <ReviewCard
-        classNames='md:flex-[0_0_50%] flex-[0_0_90%]'
+        className='flex-[0_0_90%] md:flex-[0_0_50%]'
         key={review.reviewId}
-        review={review}
+        {...review}
       ></ReviewCard>
     );
   });

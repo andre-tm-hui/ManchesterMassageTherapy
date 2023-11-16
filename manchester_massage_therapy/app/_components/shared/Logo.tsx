@@ -2,10 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ConditionalWrapper from './ConditionalWrapper';
 import MmtLogo from '../../../public/mmtLogo.svg';
+import { ComponentProps } from 'react';
 
-interface LogoProps {
-  href?: string;
-  className?: string;
+interface LogoProps extends ComponentProps<'a'> {
   size: string;
 }
 
