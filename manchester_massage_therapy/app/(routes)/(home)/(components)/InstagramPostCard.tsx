@@ -19,7 +19,11 @@ export default function InstagramPostCard({
       {/** TODO: make sure this works with multiple images - implement navigation buttons/dots */}
       <ConditionalWrapper
         condition={imageUrls.length > 1}
-        wrapper={(children) => <Carousel>{children}</Carousel>}
+        wrapper={(children) => (
+          <Carousel showButtons={true} showDots={true}>
+            {children}
+          </Carousel>
+        )}
       >
         {imageUrls.map((url, idx) => {
           return (
