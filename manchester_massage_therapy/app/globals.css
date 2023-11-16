@@ -108,3 +108,51 @@ body {
   padding-left: 1rem;
   background-clip: padding-box;
 }
+
+.embla__prev,
+.embla__next {
+  color: rgba(0, 0, 0, 0.3);
+  transition: all;
+  transition-duration: 200ms;
+  position: absolute;
+  top: 50%;
+  pointer-events: all;
+}
+
+.embla__prev:hover,
+.embla__next:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.embla__prev:disabled,
+.embla__next:disabled {
+  color: transparent;
+}
+
+.embla__next {
+  transform: translate(0, -50%);
+}
+
+.embla__prev {
+  rotate: 180deg;
+  transform: translate(0, 50%);
+}
+
+.embla__dot {
+  transition: all;
+  transition-duration: 200ms;
+  border-radius: 100%;
+  aspect-ratio: 1.0;
+  width: 0.5rem;
+  background-color: var(--blue100);
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.embla__dot:hover {
+  opacity: 90%;
+}
+
+.embla__dot--selected {
+  background-color: var(--blue200) !important;
+}

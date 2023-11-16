@@ -13,7 +13,7 @@ export default function InstagramPostCard({
 }: IInstagramPost) {
   return (
     <div
-      className='relative mb-4 bg-black text-gray-200 shadow-md shadow-card transition-all duration-100 hover:scale-[101%] hover:text-gray-200 hover:saturate-100 md:text-gray-500 md:saturate-50'
+      className='relative mb-4 cursor-default bg-black text-gray-200 shadow-md shadow-card transition-all duration-100 selection:bg-transparent hover:scale-[101%] hover:text-gray-200 hover:saturate-100 md:text-gray-500 md:saturate-50'
       style={{ aspectRatio: prefAspectRatio }}
     >
       {/** TODO: make sure this works with multiple images - implement navigation buttons/dots */}

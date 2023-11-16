@@ -12,7 +12,7 @@ export default function ReviewCard({
 }: IReviewData & ComponentProps<'div'>) {
   return (
     <div
-      className={`embla__slide flex flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card ${
+      className={`embla__slide flex cursor-default flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card selection:bg-transparent ${
         className ?? ''
       }`}
     >

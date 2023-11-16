@@ -11,7 +11,9 @@ export default function MasseuseCard({
   className,
 }: IMasseuseData & ComponentProps<'div'>) {
   return (
-    <div className={`${className} m-4 flex-col bg-menu shadow-md shadow-card`}>
+    <div
+      className={`${className} m-4 cursor-default flex-col bg-menu shadow-md shadow-card selection:bg-transparent`}
+    >
       <div className='relative h-96 md:h-[34rem]'>
         <Image
           fill={true}

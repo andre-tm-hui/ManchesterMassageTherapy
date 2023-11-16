@@ -31,6 +31,7 @@ export default function TeamPreview() {
           axis='x'
           autoplay={false}
           loop={false}
+          showButtons={true}
         >
           {masseuses.map((masseuse, _) => {
             return (

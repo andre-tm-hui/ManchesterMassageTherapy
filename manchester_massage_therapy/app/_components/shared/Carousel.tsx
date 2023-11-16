@@ -1,14 +1,17 @@
 'use client';
 
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { ComponentProps } from 'react';
+import { ComponentProps, useCallback, useEffect, useState } from 'react';
+import ChevronSvg from '../../../public/chevron.svg';
 
 interface CarouselProps extends ComponentProps<'div'> {
   autoplay?: undefined | boolean;
   axis?: undefined | 'x' | 'y';
   loop?: undefined | boolean;
   showOverflow?: undefined | boolean;
+  showButtons?: undefined | boolean;
+  showDots?: undefined | boolean;
 }
 
 export default function Carousel({
@@ -17,26 +20,97 @@ export default function Carousel({
   axis,
   loop,
   showOverflow,
+  showButtons,
+  showDots,
   children,
 }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: loop ?? false, axis: axis ?? 'x', duration: 40 },
     autoplay ? [Autoplay()] : []
   );
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
+
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setPrevBtnDisabled(!emblaApi.canScrollPrev());
+    setNextBtnDisabled(!emblaApi.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
   return (
-    <div
-      className={`embla ${
-        showOverflow ? 'overflow-visible' : 'overflow-hidden'
-      } ${className ?? ''}`}
-      ref={emblaRef}
-    >
+    <div className={`embla relative ${className ?? ''}`}>
       <div
-        className={`embla__container flex ${
-          axis == 'x' ? 'flex-row' : 'flex-col'
-        }`}
+        className={`embla__viewport ${
+          showOverflow ? 'overflow-visible' : 'overflow-hidden'
+        } ${className ?? ''}`}
+        ref={emblaRef}
       >
-        {children}
+        <div
+          className={`embla__container flex ${
+            axis == 'x' ? 'flex-row' : 'flex-col'
+          }`}
+        >
+          {children}
+        </div>
       </div>
+      {showButtons ? (
+        <div className='pointer-events-none absolute top-0 z-10 h-full w-full p-4'>
+          <button
+            className='embla__prev rotate-180'
+            onClick={scrollPrev}
+            disabled={prevBtnDisabled}
+          >
+            <ChevronSvg width={'4rem'} height={'4rem'} />
+          </button>
+          <button
+            className='embla__next right-0'
+            onClick={scrollNext}
+            disabled={nextBtnDisabled}
+          >
+            <ChevronSvg width={'4rem'} height={'4rem'} />
+          </button>
+        </div>
+      ) : undefined}
+      {showDots ? (
+        <div className='absolute bottom-5 flex w-full flex-row justify-center gap-1 p-4'>
+          {scrollSnaps.map((_, index) => (
+            <div
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
+        </div>
+      ) : undefined}
     </div>
   );
 }

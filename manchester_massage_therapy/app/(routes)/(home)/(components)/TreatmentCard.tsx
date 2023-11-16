@@ -33,7 +33,7 @@ export default function TreatmentCard({
   return (
     <div
       onClick={onClick}
-      className={`group aspect-square w-72 [perspective:1000px] selection:bg-transparent ${className}`}
+      className={`group aspect-square w-72 cursor-default  [perspective:1000px] selection:bg-transparent ${className}`}
     >
       <div className={containerClassNames.join(' ')}>
         <div className='absolute inset-0 shadow-xl'>
