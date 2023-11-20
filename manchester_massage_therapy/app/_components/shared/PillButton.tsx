@@ -1,5 +1,6 @@
-import Link, { LinkProps } from 'next/link';
+import { LinkProps } from 'next/link';
 import { ComponentProps } from 'react';
+import NoScrollLink from './NoScrollLink';
 
 export default function PillButton(
   props: ComponentProps<'a'> | (LinkProps & ComponentProps<'div'>)
@@ -8,12 +9,12 @@ export default function PillButton(
   const isInternalRoute = (
     typeof href === 'string' ? href : href.toString()
   ).startsWith('/');
-  const wrapper = isInternalRoute ? <Link href='' /> : <a />;
+  const wrapper = isInternalRoute ? <NoScrollLink href='' /> : <a />;
 
   return (
     <wrapper.type
       {...props}
-      className={`${props.className} bg-booking-button rounded-full bg-bookingButtonIdle font-bold font-bold text-bookingButton text-bookingButton transition-all ease-linear hover:bg-bookingButtonHover`}
+      className={`${props.className} bg-booking-button rounded-full bg-bookingButtonIdle font-bold font-bold text-bookingButton text-bookingButton transition-all ease-linear selection:bg-transparent hover:bg-bookingButtonHover`}
       href={href}
       target={isInternalRoute ? '' : '_blank'}
       rel={'noreferrer'}

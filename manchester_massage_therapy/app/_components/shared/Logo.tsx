@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import ConditionalWrapper from './ConditionalWrapper';
 import MmtLogo from '../../../public/mmtLogo.svg';
 import { ComponentProps } from 'react';
+import NoScrollLink from './NoScrollLink';
 
 interface LogoProps extends ComponentProps<'a'> {
   size: string;
@@ -12,9 +12,9 @@ export default function Logo({ href, className, size }: LogoProps) {
     <ConditionalWrapper
       condition={href ? true : false}
       wrapper={(children) => (
-        <Link href={href!} className={className!}>
+        <NoScrollLink href={href!} className={className!}>
           {children}
-        </Link>
+        </NoScrollLink>
       )}
     >
       <MmtLogo

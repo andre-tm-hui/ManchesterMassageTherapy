@@ -1,18 +1,19 @@
-import Link, { LinkProps } from 'next/link';
+import { LinkProps } from 'next/link';
 import Logo from '../../shared/Logo';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { ComponentProps } from 'react';
+import NoScrollLink from '../../shared/NoScrollLink';
 
 export default function Footer() {
   function FooterItem({ href, children }: LinkProps & ComponentProps<'div'>) {
     return (
       <td>
-        <Link
+        <NoScrollLink
           href={href!}
           className='transition-all ease-linear hover:brightness-125'
         >
           {children}
-        </Link>
+        </NoScrollLink>
       </td>
     );
   }
