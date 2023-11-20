@@ -64,6 +64,7 @@
 body {
   color: var(--text-primary-color);
   background-color: var(--primary-bg);
+  scroll-behavior: smooth;
 }
 
 .embla__container {

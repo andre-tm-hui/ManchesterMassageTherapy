@@ -16,7 +16,8 @@ const config: Config = {
         bookingButtonIdle: 'var(--bg-booking-button-idle-color)',
         bookingButtonHover: 'var(--bg-booking-button-hover-color)',
         dividerLine: '#B0B0B0',
-        imageFilter: 'var(--image-filter-color)'
+        imageFilter: 'var(--image-filter-color)',
+        navUnderline: 'var(--text-menu-color)'
       },
       textColor: {
         primary: 'var(--text-primary-color)',
