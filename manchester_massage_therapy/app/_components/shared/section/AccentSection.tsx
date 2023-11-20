@@ -2,10 +2,12 @@ import { ComponentProps } from 'react';
 import Section from '.';
 
 export default function AccentSection({
-  className,
   children,
+  ...all
 }: ComponentProps<'div'>) {
   return (
-    <Section className={`bg-accent ${className ?? ''}`}>{children}</Section>
+    <Section bgColor='bg-accent' {...all}>
+      {children}
+    </Section>
   );
 }
