@@ -21,7 +21,6 @@ export default function Layout(props: PropsWithChildren<{}>) {
 
   return (
     <AnimatePresence
-      initial={false}
       mode='wait'
       onExitComplete={() => {
         window.scrollTo({ top: 0 });
