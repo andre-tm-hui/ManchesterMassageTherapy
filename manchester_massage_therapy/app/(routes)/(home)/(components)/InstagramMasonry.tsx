@@ -1,11 +1,16 @@
+'use client';
+
+import { IGPost } from '@prisma/client';
 import InstagramPostCard from './InstagramPostCard';
-import {
-  altInstagramPost,
-  defaultInstagramPost,
-} from '@/app/_types/instagramPost';
 import Masonry from 'react-masonry-css';
 
-export default function InstagramMasonry() {
+interface InstagramMasonryProps {
+  instagramPosts: IGPost[];
+}
+
+export default function InstagramMasonry({
+  instagramPosts,
+}: InstagramMasonryProps) {
   const breakpointColsObj = {
     default: 4,
     1024: 3,
@@ -19,14 +24,9 @@ export default function InstagramMasonry() {
       className='masonry py-8 md:py-16'
       columnClassName='masonry-column'
     >
-      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...defaultInstagramPost}></InstagramPostCard>
-      <InstagramPostCard {...altInstagramPost}></InstagramPostCard>
+      {instagramPosts.map((post) => (
+        <InstagramPostCard key={post.uid} {...post} />
+      ))}
     </Masonry>
   );
 }

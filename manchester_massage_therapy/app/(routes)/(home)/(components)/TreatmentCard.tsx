@@ -1,20 +1,19 @@
 import { chelseaMarket } from '@/app/fonts';
+import { Therapy } from '@prisma/client';
 import Image from 'next/image';
-import { ComponentProps, MouseEventHandler } from 'react';
+import { ComponentProps } from 'react';
 import { isMobile } from 'react-device-detect';
 
-interface TreatmentCardProps extends ComponentProps<'div'> {
-  title: string;
-  description: string;
-  bookingUrl: string;
+interface TreatmentCardProps extends ComponentProps<'div'>, Therapy {
   flipped?: undefined | boolean;
 }
 
 export default function TreatmentCard({
   className,
-  title,
+  name,
   description,
   bookingUrl,
+  coverImageUrl,
   flipped,
   onClick,
 }: TreatmentCardProps) {
@@ -40,8 +39,8 @@ export default function TreatmentCard({
           <Image
             className='absolute'
             fill={true}
-            src='/assets/masseuse/placeholder.jpg'
-            alt=''
+            src={coverImageUrl}
+            alt={name}
           />
           <h1
             className={`absolute top-1/2 translate-y-[-50%] p-6 text-4xl ${chelseaMarket.className}`}
@@ -58,8 +57,8 @@ export default function TreatmentCard({
             alt=''
           />
           <div className='absolute z-10 flex h-full w-full flex-col justify-center gap-4 p-6 text-left text-sm'>
-            <h2>{title}</h2>
-            <p>{description}</p>
+            <h2>{name}</h2>
+            <p className='line-clamp-6'>{description}</p>
             <a
               className='text-logo transition-all duration-200 hover:brightness-125'
               href={bookingUrl}

@@ -1,15 +1,16 @@
-import IMasseuseData, {
-  defaultMasseuses,
-} from '@/app/_types/masseuse/Masseuse';
 import MasseuseCard from './(components)/MasseuseCard';
 import { chelseaMarket } from '@/app/fonts';
 import Carousel from '@/app/_components/shared/Carousel';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 import ArrowSVG from '../../../public/arrow.svg';
+import { prisma } from '@/libs/prisma';
+import { Practitioner } from '@prisma/client';
 
-export default function TeamPreview() {
-  const masseuses: IMasseuseData[] = defaultMasseuses;
+export default async function TeamPreview() {
+  const masseuses: Practitioner[] = await prisma.practitioner.findMany({
+    take: 5,
+  });
 
   return (
     <AccentSection className='flex flex-col justify-end pt-0 md:flex-row-reverse md:pt-8 2xl:justify-center'>
@@ -37,7 +38,7 @@ export default function TeamPreview() {
             return (
               <MasseuseCard
                 className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
-                key={masseuse.uuid}
+                key={masseuse.uid}
                 {...masseuse}
               />
             );

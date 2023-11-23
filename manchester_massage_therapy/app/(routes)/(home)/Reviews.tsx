@@ -2,19 +2,17 @@ import Carousel from '@/app/_components/shared/Carousel';
 import Overlay from '@/app/_components/shared/Overlay';
 import ReviewCard from '@/app/_components/shared/review/ReviewCard';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
-import { defaultReviews } from '@/app/_types/review/Reviews';
 import { chelseaMarket } from '@/app/fonts';
+import { prisma } from '@/libs/prisma';
 
-export default function Reviews() {
-  const googleReviews = defaultReviews.reviews.map((review, _) => {
-    return (
-      <ReviewCard
-        className='flex-[0_0_90%] md:flex-[0_0_50%]'
-        key={review.reviewId}
-        {...review}
-      ></ReviewCard>
+export default async function Reviews() {
+  const googleReviews = await prisma.googleReview
+    .findMany({ take: 8 })
+    .then((reviews) =>
+      reviews.map((review) => (
+        <ReviewCard key={review.uid} {...review}></ReviewCard>
+      ))
     );
-  });
 
   return (
     <PrimarySection className='flex flex-col justify-center md:flex-row md:space-x-10'>

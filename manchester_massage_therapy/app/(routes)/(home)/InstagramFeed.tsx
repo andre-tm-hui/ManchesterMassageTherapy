@@ -1,12 +1,14 @@
-'use client';
-
 import { chelseaMarket } from '@/app/fonts';
 import PillButton from '@/app/_components/shared/PillButton';
 import InstagramMasonry from './(components)/InstagramMasonry';
 import SecondarySection from '@/app/_components/shared/section/SecondarySection';
 import Overlay from '@/app/_components/shared/Overlay';
+import { IGPost } from '@prisma/client';
+import { prisma } from '@/libs/prisma';
 
-export default function InstagramFeed() {
+export default async function InstagramFeed() {
+  const instagramPosts: IGPost[] = await prisma.iGPost.findMany({ take: 20 });
+
   return (
     <SecondarySection className='relative col-span-1 h-auto max-h-[350vh] overflow-hidden pb-0 md:max-h-[150vh]'>
       <div className='mx-auto w-full max-w-7xl items-center px-4 md:h-full md:px-0 lg:w-4/5'>
@@ -15,7 +17,7 @@ export default function InstagramFeed() {
         >
           Gallery
         </h1>
-        <InstagramMasonry />
+        <InstagramMasonry instagramPosts={instagramPosts} />
       </div>
       <Overlay
         style={{

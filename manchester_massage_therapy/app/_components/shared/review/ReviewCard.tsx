@@ -1,39 +1,41 @@
 import Image from 'next/image';
-import IReviewData from '@/app/_types/review/Review';
 import StarRating from './StarRating';
 import { ComponentProps } from 'react';
+import { GoogleReview } from '@prisma/client';
 
 export default function ReviewCard({
-  reviewer,
+  profilePhotoUrl,
+  isAnonymous,
+  displayName,
   createTime,
-  starRating,
+  rating,
   comment,
   className,
-}: IReviewData & ComponentProps<'div'>) {
+}: GoogleReview & ComponentProps<'div'>) {
   return (
     <div
-      className={`embla__slide flex cursor-default flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card selection:bg-transparent ${
-        className ?? ''
-      }`}
+      className={`m-4 flex flex-[0_0_90%] cursor-default flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card selection:bg-transparent md:flex-[0_0_50%] ${className}`}
     >
       <div className='flex bg-secondary px-5 py-3'>
         <Image
           className='rounded-full'
           width={'48'}
           height={'48'}
-          src={reviewer.profilePhotoUrl}
+          src={profilePhotoUrl}
           alt={'/blankProfile.jpg'}
         />{' '}
         <div className='space-2 ml-4 flex flex-col text-left'>
           <p className='text-xl'>
-            {reviewer.isAnonymous ? 'Anonymous User' : reviewer.displayName}
+            {isAnonymous ? 'Anonymous User' : displayName}
           </p>
-          <p className='text-sm'>{createTime}</p>
+          <p className='text-sm'>{createTime.toDateString()}</p>
         </div>
-        <StarRating className='ml-auto' rating={starRating} />
+        <StarRating className='ml-auto' rating={rating} />
       </div>
-      <div className='flex h-40 flex-col'>
-        <p className='my-auto px-12 py-2 text-center'>{comment}</p>
+      <div className='flex h-full flex-row items-center justify-center'>
+        <div className='h-full min-w-[4rem]'></div>
+        <p className='line-clamp-5 text-center'>{comment}</p>
+        <div className='h-full min-w-[4rem]'></div>
       </div>
     </div>
   );
