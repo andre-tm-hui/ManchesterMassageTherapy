@@ -49,7 +49,7 @@ const navState = {
 export default function Navbar() {
   const path = usePathname();
 
-  const [showNav, setShowNav] = useState(2);
+  const [showNav, setShowNav] = useState(window.scrollY == 0 ? 2 : 1);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMenu, toggleShowMenu] = useCycle(false, true);
 
