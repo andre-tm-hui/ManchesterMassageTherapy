@@ -21,7 +21,6 @@ export default function InstagramPostCard({
       <Image src={url} alt={url} fill={true} className='object-contain' />
     </div>
   ));
-  console.log(images);
 
   return (
     <div
