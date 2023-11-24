@@ -7,7 +7,7 @@ import { IGPost } from '@prisma/client';
 import { prisma } from '@/libs/prisma';
 
 export default async function InstagramFeed() {
-  const instagramPosts: IGPost[] = await prisma.iGPost.findMany({ take: 20 });
+  const instagramPosts: IGPost[] = await prisma.iGPost.findMany({ take: 6 });
 
   return (
     <SecondarySection className='relative col-span-1 h-auto max-h-[350vh] overflow-hidden pb-0 md:max-h-[150vh]'>

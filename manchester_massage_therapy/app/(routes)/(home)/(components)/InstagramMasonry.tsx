@@ -3,6 +3,7 @@
 import { IGPost } from '@prisma/client';
 import InstagramPostCard from './InstagramPostCard';
 import Masonry from 'react-masonry-css';
+import { emptyIGPost } from '@/libs/templates';
 
 interface InstagramMasonryProps {
   instagramPosts: IGPost[];
@@ -17,6 +18,11 @@ export default function InstagramMasonry({
     768: 2,
     640: 1,
   };
+
+  let i = -1;
+  while (instagramPosts.length < 16) {
+    instagramPosts.push({ ...emptyIGPost, uid: i-- });
+  }
 
   return (
     <Masonry

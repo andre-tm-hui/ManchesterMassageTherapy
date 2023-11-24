@@ -27,7 +27,7 @@ export const emptyIGPost: IGPost = {
   albumUrls: [],
   uploadDate: new Date(Date.now()),
   prefAspectRatio: 9/16,
-  postUrl: '',
+  postUrl: 'https://www.instagram.com/manchester_massage_therapy/',
 }
 
 export const emptyGoogleReview: GoogleReview = {

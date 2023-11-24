@@ -3,8 +3,11 @@ import Carousel from '@/app/_components/shared/Carousel';
 import Image from 'next/image';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { IGPost } from '@prisma/client';
+import { randomInt } from 'crypto';
+import Hyperlink from '@/app/_components/shared/Hyperlink';
 
 export default function InstagramPostCard({
+  uid,
   prefAspectRatio,
   albumUrls,
   caption,
@@ -25,9 +28,10 @@ export default function InstagramPostCard({
   return (
     <div
       className='relative mb-4 cursor-default bg-black text-gray-200 shadow-md shadow-card transition-all duration-100 selection:bg-transparent hover:scale-[101%] hover:text-gray-200 hover:saturate-100 md:text-gray-500 md:saturate-50'
-      style={{ aspectRatio: prefAspectRatio }}
+      style={{
+        aspectRatio: uid > 0 ? prefAspectRatio : 0.7,
+      }}
     >
-      {/** TODO: make sure this works with multiple images - implement navigation buttons/dots */}
       <ConditionalWrapper
         condition={condition}
         wrapper={(children) => (
@@ -41,22 +45,23 @@ export default function InstagramPostCard({
           </Carousel>
         )}
       >
-        {images}
+        {uid > 0 ? images : <div className='h-full w-full bg-zinc-900' />}
       </ConditionalWrapper>
       <div className='instagram-fade overlay-filter relative flex h-full w-full flex-row flex-wrap content-end justify-end p-5'>
         <div className='mt-auto h-24 w-full'>
-          <p className='line-clamp-4 text-ellipsis text-sm'>{caption}</p>
+          <p className='line-clamp-4 text-ellipsis text-sm'>
+            {uid > 0 ? caption : 'Coming soon...'}
+          </p>
         </div>
         <p className='mt-auto h-4 basis-1/2 text-xs'>
-          {uploadDate.toDateString()}
+          {uid > 0 && uploadDate.toDateString()}
         </p>
-        <a
-          className='pointer-events-auto z-10 ml-auto h-6 text-logo'
+        <Hyperlink
+          className='pointer-events-auto z-10 ml-auto mr-0 h-6 text-logo'
           href={postUrl}
-          target={'_blank'}
         >
           <InstagramLogo width={'1.5rem'} height={'1.5rem'} />
-        </a>
+        </Hyperlink>
       </div>
     </div>
   );
