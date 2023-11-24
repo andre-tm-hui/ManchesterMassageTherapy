@@ -31,7 +31,7 @@
   --text-primary-color: black;
   --text-secondary-color: var(--grey300);
   --text-accent-color: var(--blue100);
-  --text-menu-color: var(--blue100);
+  --text-menu-color: var(--grey300);
   --text-svg-color: black;
   --text-booking-button-color: var(--grey300);
   --text-hyperlink-color: var(--blue200);
@@ -52,7 +52,7 @@
     --text-primary-color: white;
     --text-secondary-color: white;
     --text-accent-color: var(--blue200);
-    --text-menu-color: var(--blue200);
+    --text-menu-color: var(--grey600);
     --text-svg-color: var(--blue300);
     --text-booking-button-color: black;
     --text-hyperlink-color: var(--blue300);
