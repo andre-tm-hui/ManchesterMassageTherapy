@@ -84,7 +84,7 @@ async function main() {
       profilePhotoUrl: '/blankProfile.jpg',
       displayName: 'John Doe',
       isAnonymous: false,
-      rating: 5,
+      rating: randomInt(3, 5),
       comment: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ornare dolor, sed dignissim ex aliquam vitae. Nam facilisis vitae nisl nec semper. Nullam non enim sit amet diam vulputate fermentum eget ac quam. Praesent euismod dui eu mi suscipit venenatis. Nulla maximus ipsum sagittis justo tincidunt viverra eget cursus mi. Suspendisse a purus nunc. Sed ac posuere nisl. Ut at dolor vel nunc rhoncus tempor facilisis id odio. Aliquam porttitor, ligula quis gravida condimentum, metus metus volutpat dolor, vitae tincidunt lacus lorem id sapien. Quisque sit amet gravida lectus, eget lobortis ipsum. Mauris faucibus placerat nisi vel pulvinar. Praesent ut sem in diam eleifend porttitor. Proin ac sagittis est.\n\nInterdum et malesuada fames ac ante ipsum primis in faucibus. In mollis elementum mauris, ornare malesuada dui congue vitae. Vivamus pretium lacus ac diam porttitor, eget ornare ipsum laoreet. Nunc turpis ipsum, luctus id feugiat sed, bibendum in sem. Maecenas ut tempor eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ipsum dolor, euismod molestie enim nec, cursus dapibus erat. ',
       createTime: new Date(2001, 9, 11, 11, 59, 59, 0),
     })
