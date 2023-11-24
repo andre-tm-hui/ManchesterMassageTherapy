@@ -42,7 +42,7 @@ const navState = {
     y: 0,
   },
   hidden: {
-    y: -72,
+    y: '-100%',
   },
 };
 
@@ -83,7 +83,7 @@ export default function Navbar() {
       animate={showNav || showMenu ? 'show' : 'hidden'}
       variants={navState}
       transition={{ duration: 0.1 }}
-      className={`fixed z-50 h-[72px] w-screen text-menu`}
+      className={`fixed z-50 h-[5rem] w-screen text-menu`}
     >
       <div
         className={`h-full w-full transition-all delay-100 duration-300 ${
