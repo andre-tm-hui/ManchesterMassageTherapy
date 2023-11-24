@@ -50,14 +50,14 @@ export default async function MasseuseCard({
       <div className='h-24 space-y-1 px-3 py-2 md:h-28'>
         <h3
           className={`${chelseaMarket.className} ${
-            uid < 0 && 'h-8 w-48 rounded-full bg-secondary text-transparent'
+            uid < 0 && 'h-8 w-48 rounded-lg bg-secondary text-transparent'
           }`}
         >
           {firstName + ' ' + surname}
         </h3>
         <p
           className={`text-xs ${
-            uid < 0 && 'h-4 w-64 rounded-full bg-secondary text-transparent'
+            uid < 0 && 'h-4 w-64 rounded-lg bg-secondary text-transparent'
           }`}
         >{`Years with MMT: ${(
           (Date.now() - joinDate.getTime()) /
@@ -65,8 +65,7 @@ export default async function MasseuseCard({
         ).toFixed(0)}`}</p>
         <p
           className={`text-xs ${
-            uid < 0 &&
-            'h-auto w-full rounded-full bg-secondary text-transparent'
+            uid < 0 && 'h-auto w-full rounded-lg bg-secondary text-transparent'
           }`}
         >{`Expert In: ${expertInNames.join(', ')}`}</p>
       </div>

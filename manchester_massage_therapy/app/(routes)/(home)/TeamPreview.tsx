@@ -10,8 +10,14 @@ import { emptyPractitioner } from '@/libs/templates';
 
 export default async function TeamPreview() {
   const masseuses: Practitioner[] = await prisma.practitioner.findMany({
-    take: 5,
+    take: 1,
   });
+
+  let i = -1;
+  while (masseuses.length < 3) {
+    masseuses.push({ ...emptyPractitioner, uid: i-- });
+  }
+  masseuses.reverse();
 
   return (
     <AccentSection className='flex flex-col justify-end pt-0 md:flex-row-reverse md:pt-8 2xl:justify-center'>
@@ -35,12 +41,6 @@ export default async function TeamPreview() {
           loop={false}
           showButtons={true}
         >
-          {masseuses.length < 3 && (
-            <MasseuseCard
-              className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
-              {...emptyPractitioner}
-            />
-          )}
           {masseuses.map((masseuse, _) => {
             return (
               <MasseuseCard
