@@ -6,6 +6,7 @@ import Hyperlink from '@/app/_components/shared/Hyperlink';
 import ArrowSVG from '../../../public/arrow.svg';
 import { prisma } from '@/libs/prisma';
 import { Practitioner } from '@prisma/client';
+import { emptyPractitioner } from '@/libs/templates';
 
 export default async function TeamPreview() {
   const masseuses: Practitioner[] = await prisma.practitioner.findMany({
@@ -34,6 +35,12 @@ export default async function TeamPreview() {
           loop={false}
           showButtons={true}
         >
+          {masseuses.length < 3 && (
+            <MasseuseCard
+              className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
+              {...emptyPractitioner}
+            />
+          )}
           {masseuses.map((masseuse, _) => {
             return (
               <MasseuseCard
