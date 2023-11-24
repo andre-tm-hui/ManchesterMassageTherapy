@@ -3,6 +3,8 @@ import StarRating from './StarRating';
 import { ComponentProps, ReactNode } from 'react';
 import { GoogleReview } from '@prisma/client';
 import SpeechMarkSVG from 'public/speechmark.svg';
+import Hyperlink from '../Hyperlink';
+import { chelseaMarket } from '@/app/fonts';
 
 export default function ReviewCard({
   uid,
@@ -65,11 +67,19 @@ export default function ReviewCard({
         {SpeechMark(false)}
         <p
           className={`line-clamp-[7] text-center md:line-clamp-5 ${
-            uid.length == 0 &&
-            'h-24 w-full rounded-lg bg-primary text-transparent'
+            uid.length == 0 && 'h-24 w-full rounded-lg bg-primary'
           }`}
         >
-          {comment}
+          {uid.length == 0 ? (
+            <Hyperlink
+              href='/'
+              className={`mx-auto mt-2 text-2xl text-secondary ${chelseaMarket.className}`}
+            >
+              Leave a review!
+            </Hyperlink>
+          ) : (
+            comment
+          )}
         </p>
         {SpeechMark(true)}
       </div>
