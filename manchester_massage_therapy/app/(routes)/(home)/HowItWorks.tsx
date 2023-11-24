@@ -5,6 +5,7 @@ import SelectTreatmentSVG from '../../../public/assets/home/selectTreatment.svg'
 import ScheduleTreatmentSVG from '../../../public/assets/home/scheduleTreatment.svg';
 import RelaxSVG from '../../../public/assets/home/relax.svg';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
+import Hyperlink from '@/app/_components/shared/Hyperlink';
 
 export default function HowItWorks() {
   return (
@@ -22,12 +23,7 @@ export default function HowItWorks() {
           desc='Select the on that fits your needs best'
           color='text-svg'
         >
-          <a
-            className='text-accent transition-all duration-200 hover:brightness-125'
-            href='./'
-          >
-            Unsure?
-          </a>
+          <Hyperlink href='/'>Unsure?</Hyperlink>
         </SVGCard>
         <SVGCard
           key={2}
