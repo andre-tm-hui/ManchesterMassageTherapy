@@ -4,15 +4,21 @@ import ReviewCard from '@/app/_components/shared/review/ReviewCard';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import { prisma } from '@/libs/prisma';
+import { emptyGoogleReview } from '@/libs/templates';
 
 export default async function Reviews() {
-  const googleReviews = await prisma.googleReview
-    .findMany({ take: 8 })
+  let googleReviews = await prisma.googleReview
+    .findMany({ take: 3 })
     .then((reviews) =>
       reviews.map((review) => (
         <ReviewCard key={review.uid} {...review}></ReviewCard>
       ))
     );
+
+  let i = -1;
+  while (googleReviews.length < 5) {
+    googleReviews.push(<ReviewCard key={i--} {...emptyGoogleReview} />);
+  }
 
   return (
     <PrimarySection className='flex flex-col justify-center md:flex-row md:space-x-10'>

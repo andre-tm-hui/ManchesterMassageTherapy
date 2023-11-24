@@ -5,6 +5,7 @@ import { GoogleReview } from '@prisma/client';
 import SpeechMarkSVG from 'public/speechmark.svg';
 
 export default function ReviewCard({
+  uid,
   profilePhotoUrl,
   isAnonymous,
   displayName,
@@ -34,20 +35,42 @@ export default function ReviewCard({
           className='rounded-full'
           width={'48'}
           height={'48'}
-          src={profilePhotoUrl}
-          alt={'/blankProfile.jpg'}
+          src={uid.length == 0 ? '/blankProfile.jpg' : profilePhotoUrl}
+          alt={''}
         />{' '}
-        <div className='space-2 ml-4 flex flex-col text-left'>
-          <p className='text-xl'>
+        <div className='ml-4 flex flex-col text-left'>
+          <p
+            className={`text-xl ${
+              uid.length == 0 &&
+              'h-8 w-48 rounded-lg bg-primary text-transparent'
+            }`}
+          >
             {isAnonymous ? 'Anonymous User' : displayName}
           </p>
-          <p className='text-sm'>{createTime.toDateString()}</p>
+          <p
+            className={`text-sm ${
+              uid.length == 0 &&
+              'mt-1 h-4 w-24 rounded-lg bg-primary text-transparent'
+            }`}
+          >
+            {createTime.toDateString()}
+          </p>
         </div>
-        <StarRating className='ml-auto mr-0 gap-1' rating={rating} />
+        <StarRating
+          className='ml-auto mr-0 gap-1'
+          rating={uid.length == 0 ? 0 : rating}
+        />
       </div>
       <div className='flex h-full flex-row items-center justify-center'>
         {SpeechMark(false)}
-        <p className='line-clamp-[7] text-center md:line-clamp-5'>{comment}</p>
+        <p
+          className={`line-clamp-[7] text-center md:line-clamp-5 ${
+            uid.length == 0 &&
+            'h-24 w-full rounded-lg bg-primary text-transparent'
+          }`}
+        >
+          {comment}
+        </p>
         {SpeechMark(true)}
       </div>
     </div>

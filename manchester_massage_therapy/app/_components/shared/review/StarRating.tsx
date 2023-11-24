@@ -9,9 +9,7 @@ export default function StarRating({ rating, className }: StarRatingProps) {
   const Star = (highlighted: boolean, key: number) => (
     <div
       key={key}
-      className={`h-4 w-4 ${
-        highlighted ? 'text-yellow-300' : 'text-slate-100'
-      }`}
+      className={`h-4 w-4 ${highlighted ? 'text-yellow-300' : 'text-zinc-500'}`}
     >
       <StarSVG width='1rem' height='1rem' />
     </div>
