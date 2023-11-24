@@ -17,7 +17,6 @@ export default async function TeamPreview() {
   while (masseuses.length < 3) {
     masseuses.push({ ...emptyPractitioner, uid: i-- });
   }
-  masseuses.reverse();
 
   return (
     <AccentSection className='flex flex-col justify-end pt-0 md:flex-row-reverse md:pt-8 2xl:justify-center'>
@@ -36,10 +35,8 @@ export default async function TeamPreview() {
       <div className='w-full max-w-6xl md:w-[55%]'>
         <Carousel
           className='mx-0 block w-full w-full'
-          axis='x'
-          autoplay={false}
-          loop={false}
           showButtons={true}
+          direction='rtl'
         >
           {masseuses.map((masseuse, _) => {
             return (

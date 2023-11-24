@@ -26,6 +26,7 @@ export default async function MasseuseCard({
 
   return (
     <div
+      dir='ltr'
       className={`${className} m-4 cursor-default flex-col bg-menu shadow-md shadow-card selection:bg-transparent`}
     >
       <div className='relative h-96 md:h-[34rem]'>
