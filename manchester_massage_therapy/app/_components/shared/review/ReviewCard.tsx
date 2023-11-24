@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import StarRating from './StarRating';
-import { ComponentProps } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { GoogleReview } from '@prisma/client';
+import SpeechMarkSVG from 'public/speechmark.svg';
 
 export default function ReviewCard({
   profilePhotoUrl,
@@ -12,6 +13,18 @@ export default function ReviewCard({
   comment,
   className,
 }: GoogleReview & ComponentProps<'div'>) {
+  function SpeechMark(rotate: boolean) {
+    return (
+      <div
+        className={`flex h-full min-w-[4rem] justify-center py-4 text-secondary opacity-75 ${
+          rotate && 'rotate-180'
+        }`}
+      >
+        <SpeechMarkSVG width='1.5rem' height='1.5rem' />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`m-4 flex flex-[0_0_90%] cursor-default flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card selection:bg-transparent md:flex-[0_0_50%] ${className}`}
@@ -33,9 +46,9 @@ export default function ReviewCard({
         <StarRating className='ml-auto' rating={rating} />
       </div>
       <div className='flex h-full flex-row items-center justify-center'>
-        <div className='h-full min-w-[4rem]'></div>
+        {SpeechMark(false)}
         <p className='line-clamp-5 text-center'>{comment}</p>
-        <div className='h-full min-w-[4rem]'></div>
+        {SpeechMark(true)}
       </div>
     </div>
   );
