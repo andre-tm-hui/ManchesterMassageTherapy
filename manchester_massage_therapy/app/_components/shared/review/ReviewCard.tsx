@@ -29,7 +29,7 @@ export default function ReviewCard({
     <div
       className={`m-4 flex flex-[0_0_90%] cursor-default flex-col overflow-hidden rounded-3xl bg-menu shadow-lg shadow-card selection:bg-transparent md:flex-[0_0_50%] ${className}`}
     >
-      <div className='flex bg-secondary px-5 py-3'>
+      <div className='flex items-center bg-secondary px-5 py-3'>
         <Image
           className='rounded-full'
           width={'48'}
@@ -43,11 +43,11 @@ export default function ReviewCard({
           </p>
           <p className='text-sm'>{createTime.toDateString()}</p>
         </div>
-        <StarRating className='ml-auto' rating={rating} />
+        <StarRating className='ml-auto mr-0 gap-1' rating={rating} />
       </div>
       <div className='flex h-full flex-row items-center justify-center'>
         {SpeechMark(false)}
-        <p className='line-clamp-5 text-center'>{comment}</p>
+        <p className='line-clamp-[7] text-center md:line-clamp-5'>{comment}</p>
         {SpeechMark(true)}
       </div>
     </div>
