@@ -49,7 +49,8 @@ const navState = {
 export default function Navbar() {
   const path = usePathname();
 
-  const [showNav, setShowNav] = useState(window.scrollY == 0 ? 2 : 1);
+  const [init, setInit] = useState(false);
+  const [showNav, setShowNav] = useState(2);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMenu, toggleShowMenu] = useCycle(false, true);
 
@@ -65,6 +66,11 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener('scroll', controlNavbar);
+    if (!init) {
+      setLastScrollY(window.scrollY);
+      setShowNav(window.scrollY == 0 ? 2 : 1);
+      setInit(true);
+    }
 
     return () => {
       window.removeEventListener('scroll', controlNavbar);
