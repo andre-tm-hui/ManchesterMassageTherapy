@@ -4,8 +4,39 @@ import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { ComponentProps } from 'react';
 import NoScrollLink from '../../shared/NoScrollLink';
 
+const footerItems = [
+  {
+    title: 'About MMT',
+    links: [
+      { href: './', text: 'Home' },
+      { href: '/services', text: 'Services' },
+      { href: '/team', text: 'Meet the Team' },
+      { href: '/safety', text: 'Safety' },
+      { href: '/legal', text: 'Legal' },
+    ],
+  },
+  {
+    title: 'Interested in Helping?',
+    links: [
+      { href: '/careers', text: 'Join the Team' },
+      { href: '/contact', text: 'Business Inquiries' },
+    ],
+  },
+  {
+    title: 'Need Help?',
+    links: [
+      { href: '/faq', text: 'FAQ' },
+      { href: '/contact', text: 'Contact Us' },
+      { href: '/sitemap', text: 'Sitemap' },
+    ],
+  },
+];
+
 export default function Footer() {
-  function FooterItem({ href, children }: LinkProps & ComponentProps<'div'>) {
+  function FooterItem({
+    href = '',
+    children,
+  }: LinkProps & ComponentProps<'div'>) {
     return (
       <td>
         <NoScrollLink
@@ -23,98 +54,45 @@ export default function Footer() {
       <div className='mx-auto w-[90%] max-w-7xl lg:w-4/5'>
         <div className='my-auto w-full max-w-5xl pb-8 md:pt-8'>
           <table className='hidden h-full w-full table-fixed md:table lg:w-4/5'>
-            <thead className='pb-8 text-left align-top text-primary'>
+            <thead className='text-left align-top text-primary'>
               <tr>
-                <th>About MMT</th>
-                <th>Interested in Helping?</th>
-                <th>Need Help?</th>
+                {footerItems.map((item) => (
+                  <th key={item.title}>{item.title}</th>
+                ))}
               </tr>
             </thead>
             <tbody className='transition-all ease-linear'>
-              <tr className='h-6'></tr>
-              <tr>
-                <FooterItem href='./'>Home</FooterItem>
-                <FooterItem href='/careers'>Join the Team</FooterItem>
-                <FooterItem href='/faq'>FAQ</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/services'>Services</FooterItem>
-                <FooterItem href='/contact'>Business Inquiries</FooterItem>
-                <FooterItem href='/contact'>Contact Us</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/team'>Meet the Team</FooterItem>
-                <td />
-                <FooterItem href='/sitemap'>Sitemap</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/safety'>Safety</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/legal'>Legal</FooterItem>
-              </tr>
+              <tr className='h-4' />
+              {footerItems[0].links.map((_, index) => (
+                <tr key={index}>
+                  {footerItems.map((item) => (
+                    <FooterItem
+                      key={item.links[index]?.href}
+                      href={item.links[index]?.href}
+                    >
+                      {item.links[index]?.text}
+                    </FooterItem>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
-          <table className='h-full w-full md:hidden'>
-            <thead className='pb-8 text-left align-top text-primary'>
-              <tr>
-                <th>About MMT</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className='h-6'></tr>
-              <tr>
-                <FooterItem href='./'>Home</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/services'>Services</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/team'>Meet the Team</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/safety'>Safety</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/legal'>Legal</FooterItem>
-              </tr>
-            </tbody>
-          </table>
-          <table className='mt-8 h-full w-full md:hidden'>
-            <thead className='pb-8 text-left align-top text-primary'>
-              <tr>
-                <th>Interested in Helping?</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className='h-6'></tr>
-              <tr>
-                <FooterItem href='/careers'>Join the Team</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/contact'>Business Inquiries</FooterItem>
-              </tr>
-            </tbody>
-          </table>
-          <table className='mt-8 h-full w-full md:hidden'>
-            <thead className='pb-8 text-left align-top text-primary'>
-              <tr>
-                <th>Need Help?</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className='h-6'></tr>
-              <tr>
-                <FooterItem href='/faq'>FAQ</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/contact'>Contact Us</FooterItem>
-              </tr>
-              <tr>
-                <FooterItem href='/sitemap'>Sitemap</FooterItem>
-              </tr>
-            </tbody>
-          </table>
+          {footerItems.map((item) => (
+            <table key={item.title} className='mb-8 h-full w-full md:hidden'>
+              <thead className='pb-8 text-left align-top text-primary'>
+                <tr>
+                  <th>{item.title}</th>
+                </tr>
+              </thead>
+              <tbody className='transition-all ease-linear'>
+                {item.links.map((link) => (
+                  <tr key={link.href}>
+                    <FooterItem href={link.href}>{link.text}</FooterItem>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ))}
         </div>
         <div className='h-px w-full bg-dividerLine'></div>
         <div className='flex h-auto w-full justify-start py-3 align-middle'>

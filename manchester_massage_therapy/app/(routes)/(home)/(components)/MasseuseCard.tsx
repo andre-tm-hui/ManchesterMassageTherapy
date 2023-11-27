@@ -1,6 +1,6 @@
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 import { chelseaMarket } from '@/app/fonts';
-import { prisma } from '@/libs/prisma';
+import { treatmentIdsToNames, getYears } from '@/libs/util';
 import { Practitioner } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
@@ -14,15 +14,13 @@ export default async function MasseuseCard({
   expertIn,
   className,
 }: Practitioner & ComponentProps<'div'>) {
-  const expertInNames = await Promise.all(
-    expertIn.map(async (uid) => {
-      return await prisma.therapy
-        .findFirst({ where: { uid: uid } })
-        .then((res) => {
-          return res?.name;
-        });
-    })
-  );
+  const expertInNames = await treatmentIdsToNames(expertIn);
+  const isPlaceholder = uid < 0;
+  const placeholderClass = isPlaceholder
+    ? 'rounded-lg bg-secondary text-transparent'
+    : '';
+  const fullName = `${firstName} ${surname}`;
+  const yearsWithMMT = getYears(joinDate);
 
   return (
     <div
@@ -30,11 +28,11 @@ export default async function MasseuseCard({
       className={`${className} m-4 cursor-default flex-col bg-menu shadow-md shadow-card selection:bg-transparent`}
     >
       <div className='relative h-96 md:h-[34rem]'>
-        {uid > 0 ? (
+        {profilePhotoUrl ? (
           <Image
             fill={true}
             src={profilePhotoUrl}
-            alt={firstName + ' ' + surname}
+            alt={fullName}
             className='object-cover'
           />
         ) : (
@@ -51,24 +49,25 @@ export default async function MasseuseCard({
       <div className='h-24 space-y-1 px-3 py-2 md:h-28'>
         <h3
           className={`${chelseaMarket.className} ${
-            uid < 0 && 'h-8 w-48 rounded-lg bg-secondary text-transparent'
-          }`}
+            isPlaceholder && 'h-8 w-48'
+          } ${placeholderClass}`}
         >
-          {firstName + ' ' + surname}
+          {fullName}
         </h3>
         <p
           className={`text-xs ${
-            uid < 0 && 'h-4 w-64 rounded-lg bg-secondary text-transparent'
-          }`}
-        >{`Years with MMT: ${(
-          (Date.now() - joinDate.getTime()) /
-          (1000 * 60 * 60 * 24 * 365.25)
-        ).toFixed(0)}`}</p>
+            isPlaceholder && 'h-4 w-64'
+          } ${placeholderClass}`}
+        >
+          {`Years with MMT: ${yearsWithMMT}`}
+        </p>
         <p
           className={`text-xs ${
-            uid < 0 && 'h-auto w-full rounded-lg bg-secondary text-transparent'
-          }`}
-        >{`Expert In: ${expertInNames.join(', ')}`}</p>
+            isPlaceholder && 'h-auto w-full'
+          } ${placeholderClass}`}
+        >
+          {`Expert In: ${expertInNames}`}
+        </p>
       </div>
     </div>
   );
