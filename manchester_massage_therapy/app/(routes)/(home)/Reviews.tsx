@@ -1,23 +1,21 @@
 import Carousel from '@/app/_components/shared/Carousel';
 import Overlay from '@/app/_components/shared/Overlay';
+import PlaceholderReviewCard from '@/app/_components/shared/review/PlaceholderReviewCard';
 import ReviewCard from '@/app/_components/shared/review/ReviewCard';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import { prisma } from '@/libs/prisma';
-import { emptyGoogleReview } from '@/libs/templates';
 
 export default async function Reviews() {
   let googleReviews = await prisma.googleReview
     .findMany({ take: 3 })
     .then((reviews) =>
-      reviews.map((review) => (
-        <ReviewCard key={review.uid} {...review}></ReviewCard>
-      ))
+      reviews.map((review) => <ReviewCard key={review.uid} {...review} />)
     );
 
   let i = -1;
   while (googleReviews.length < 5) {
-    googleReviews.push(<ReviewCard key={i--} {...emptyGoogleReview} />);
+    googleReviews.push(<PlaceholderReviewCard key={i--} />);
   }
 
   return (
