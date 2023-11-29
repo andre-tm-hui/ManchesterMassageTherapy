@@ -1,5 +1,5 @@
 import ConditionalWrapper from '@/app/_components/shared/ConditionalWrapper';
-import Carousel from '@/app/_components/shared/Carousel';
+import Carousel from '@/app/_components/shared/carousel';
 import Image from 'next/image';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { IGPost } from '@prisma/client';

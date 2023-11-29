@@ -1,6 +1,6 @@
 import MasseuseCard from './(components)/MasseuseCard';
 import { chelseaMarket } from '@/app/fonts';
-import Carousel from '@/app/_components/shared/Carousel';
+import Carousel from '@/app/_components/shared/carousel';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 import ArrowSVG from '../../../public/arrow.svg';
@@ -36,7 +36,7 @@ export default async function TeamPreview() {
         <Carousel
           className='mx-0 block w-full w-full'
           showButtons={true}
-          direction='rtl'
+          dir='rtl'
         >
           {masseuses.map((masseuse, _) => {
             return (

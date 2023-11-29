@@ -3,7 +3,8 @@
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ComponentProps, useCallback, useEffect, useState } from 'react';
-import ChevronSvg from '../../../public/chevron.svg';
+import CarouselButtons from './CarouselButtons';
+import CarouselDots from './CarouselDots';
 
 interface CarouselProps extends ComponentProps<'div'> {
   autoplay?: undefined | boolean;
@@ -12,7 +13,7 @@ interface CarouselProps extends ComponentProps<'div'> {
   showOverflow?: undefined | boolean;
   showButtons?: undefined | boolean;
   showDots?: undefined | boolean;
-  direction?: undefined | 'ltr' | 'rtl';
+  dir?: undefined | 'ltr' | 'rtl';
 }
 
 export default function Carousel({
@@ -23,7 +24,7 @@ export default function Carousel({
   showOverflow = false,
   showButtons = false,
   showDots = false,
-  direction = 'ltr',
+  dir = 'ltr',
   children,
 }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -31,7 +32,7 @@ export default function Carousel({
       loop: loop ?? false,
       axis: axis ?? 'x',
       duration: 40,
-      direction: direction,
+      direction: dir,
     },
     autoplay ? [Autoplay()] : []
   );
@@ -80,7 +81,7 @@ export default function Carousel({
         ref={emblaRef}
       >
         <div
-          dir={direction}
+          dir={dir}
           className={`embla__container flex ${
             axis == 'x' ? 'flex-row' : 'flex-col'
           }`}
@@ -88,38 +89,23 @@ export default function Carousel({
           {children}
         </div>
       </div>
-      {showButtons ? (
-        <div className='pointer-events-none absolute top-0 z-10 h-full w-full p-4'>
-          <button
-            className='embla__prev rotate-180'
-            onClick={direction === 'ltr' ? scrollPrev : scrollNext}
-            disabled={direction === 'ltr' ? prevBtnDisabled : nextBtnDisabled}
-          >
-            <ChevronSvg width={'4rem'} height={'4rem'} />
-          </button>
-          <button
-            className='embla__next right-0'
-            onClick={direction === 'ltr' ? scrollNext : scrollPrev}
-            disabled={direction === 'ltr' ? nextBtnDisabled : prevBtnDisabled}
-          >
-            <ChevronSvg width={'4rem'} height={'4rem'} />
-          </button>
-        </div>
-      ) : undefined}
-      {showDots ? (
-        <div className='absolute bottom-5 flex w-full flex-row justify-center gap-1 p-4'>
-          {scrollSnaps.map((_, index) => (
-            <div
-              dir={direction}
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
-        </div>
-      ) : undefined}
+      {showButtons && (
+        <CarouselButtons
+          scrollPrev={scrollPrev}
+          scrollNext={scrollNext}
+          prevBtnDisabled={prevBtnDisabled}
+          nextBtnDisabled={nextBtnDisabled}
+          dir={dir}
+        />
+      )}
+      {showDots && (
+        <CarouselDots
+          scrollSnaps={scrollSnaps}
+          selectedIndex={selectedIndex}
+          scrollTo={scrollTo}
+          dir={dir}
+        />
+      )}
     </div>
   );
 }

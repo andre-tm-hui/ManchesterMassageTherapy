@@ -1,4 +1,4 @@
-import Carousel from '@/app/_components/shared/Carousel';
+import Carousel from '@/app/_components/shared/carousel';
 import Overlay from '@/app/_components/shared/Overlay';
 import PlaceholderReviewCard from '@/app/_components/shared/review/PlaceholderReviewCard';
 import ReviewCard from '@/app/_components/shared/review/ReviewCard';
