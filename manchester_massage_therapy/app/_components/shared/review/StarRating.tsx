@@ -21,7 +21,6 @@ export default function StarRating({ rating, className }: StarRatingProps) {
   }
 
   return (
-    // TODO: implement
     <div className={`flex flex-row ${className}`}>
       {stars.map((star) => star)}
     </div>
