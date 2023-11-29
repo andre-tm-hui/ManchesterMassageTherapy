@@ -1,21 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import Logo from '../../shared/Logo';
 import BurgerMenu from '../../../../public/burgerMenu.svg';
-import style from './navbar.module.css';
 import { useEffect, useState } from 'react';
 import BookingButton from '../../shared/BookingButton';
-import { usePathname } from 'next/navigation';
 import { motion, useCycle } from 'framer-motion';
-import NoScrollLink from '../../shared/NoScrollLink';
-
-const menuOptions = [
-  { label: 'Home', href: '/' },
-  { label: 'Services & Packages', href: '/services' },
-  { label: 'Meet the Team', href: '/team' },
-  { label: 'Get in Touch', href: '/contact' },
-];
+import NavItems from './NavItems';
 
 const menuState = {
   open: {
@@ -47,8 +37,6 @@ const navState = {
 };
 
 export default function Navbar() {
-  const path = usePathname();
-
   const [init, setInit] = useState(false);
   const [showNav, setShowNav] = useState(2);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -83,7 +71,7 @@ export default function Navbar() {
       animate={showNav || showMenu ? 'show' : 'hidden'}
       variants={navState}
       transition={{ duration: 0.1 }}
-      className={`fixed z-50 h-[5rem] w-screen text-menu`}
+      className='fixed z-50 h-[5rem] w-screen text-menu'
     >
       <div
         className={`h-full w-full transition-all delay-100 duration-300 ${
@@ -97,22 +85,7 @@ export default function Navbar() {
             size='60px'
           />
           <ul className='hidden flex-grow gap-x-3 font-bold md:ml-10 md:flex lg:gap-x-10'>
-            {menuOptions.map(({ label, href }, idx) => {
-              return (
-                <li key={idx}>
-                  <NoScrollLink
-                    className={`transition-all ease-linear selection:bg-transparent hover:brightness-125 ${
-                      href === path
-                        ? 'pointer-events-none brightness-150'
-                        : 'brightness-75'
-                    }`}
-                    href={href}
-                  >
-                    {label}
-                  </NoScrollLink>
-                </li>
-              );
-            })}
+            <NavItems />
             <li className='ml-auto'>
               <BookingButton className='w-40 px-6 py-3'></BookingButton>
             </li>
@@ -136,23 +109,7 @@ export default function Navbar() {
         >
           <div className='flex h-screen w-screen overflow-hidden overscroll-none'>
             <ul className='content-right my-16 flex h-auto w-full flex-col justify-center gap-8 px-12 pt-[72px] text-right text-2xl font-bold'>
-              {menuOptions.map(({ label, href }, idx) => {
-                return (
-                  <li key={idx}>
-                    <NoScrollLink
-                      className={`transition-all ease-linear selection:bg-transparent hover:brightness-125 ${
-                        href === path
-                          ? 'pointer-events-none brightness-150'
-                          : 'brightness-75'
-                      }`}
-                      href={href}
-                      onClick={() => toggleShowMenu()}
-                    >
-                      {label}
-                    </NoScrollLink>
-                  </li>
-                );
-              })}
+              <NavItems onClick={toggleShowMenu} />
               <li className='mt-auto'>
                 <BookingButton className='w-40 px-6 py-3'></BookingButton>
               </li>
