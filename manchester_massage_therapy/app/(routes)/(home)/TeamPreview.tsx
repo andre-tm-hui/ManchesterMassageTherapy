@@ -5,17 +5,31 @@ import AccentSection from '@/app/_components/shared/section/AccentSection';
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 import ArrowSVG from '../../../public/arrow.svg';
 import { prisma } from '@/libs/prisma';
-import { Practitioner } from '@prisma/client';
-import { emptyPractitioner } from '@/libs/templates';
+import PlaceholderMasseuseCard from './(components)/PlaceholderMasseuseCard';
 
 export default async function TeamPreview() {
-  const masseuses: Practitioner[] = await prisma.practitioner.findMany({
-    take: 1,
-  });
+  const masseuses = await prisma.practitioner
+    .findMany({
+      take: 1,
+    })
+    .then((masseuses) =>
+      masseuses.map((masseuse) => (
+        <MasseuseCard
+          key={masseuse.uid}
+          className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
+          {...masseuse}
+        />
+      ))
+    );
 
   let i = -1;
   while (masseuses.length < 3) {
-    masseuses.push({ ...emptyPractitioner, uid: i-- });
+    masseuses.push(
+      <PlaceholderMasseuseCard
+        className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
+        key={i--}
+      />
+    );
   }
 
   return (
@@ -38,15 +52,7 @@ export default async function TeamPreview() {
           showButtons={true}
           dir='rtl'
         >
-          {masseuses.map((masseuse, _) => {
-            return (
-              <MasseuseCard
-                className='mr-3 flex-[0_0_16em] md:flex-[0_0_20em]'
-                key={masseuse.uid}
-                {...masseuse}
-              />
-            );
-          })}
+          {masseuses.map((masseuse, _) => masseuse)}
         </Carousel>
       </div>
     </AccentSection>

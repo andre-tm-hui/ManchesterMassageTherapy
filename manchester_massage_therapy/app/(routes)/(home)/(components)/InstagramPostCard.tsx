@@ -3,7 +3,6 @@ import Carousel from '@/app/_components/shared/carousel';
 import Image from 'next/image';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { IGPost } from '@prisma/client';
-import { randomInt } from 'crypto';
 import Hyperlink from '@/app/_components/shared/Hyperlink';
 
 export default function InstagramPostCard({
