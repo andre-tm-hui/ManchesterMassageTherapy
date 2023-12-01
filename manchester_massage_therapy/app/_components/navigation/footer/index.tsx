@@ -3,6 +3,7 @@ import Logo from '../../shared/widgets/Logo';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { ComponentProps } from 'react';
 import NoScrollLink from '../../shared/widgets/NoScrollLink';
+import FooterItem from './FooterItem';
 
 const footerItems = [
   {
@@ -33,22 +34,6 @@ const footerItems = [
 ];
 
 export default function Footer() {
-  function FooterItem({
-    href = '',
-    children,
-  }: LinkProps & ComponentProps<'div'>) {
-    return (
-      <td>
-        <NoScrollLink
-          href={href!}
-          className='transition-all ease-linear hover:brightness-125'
-        >
-          {children}
-        </NoScrollLink>
-      </td>
-    );
-  }
-
   return (
     <div className='w-full bg-menu text-sm text-secondary'>
       <div className='mx-auto w-[90%] max-w-7xl lg:w-4/5'>
