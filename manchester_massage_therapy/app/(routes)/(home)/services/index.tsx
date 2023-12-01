@@ -1,7 +1,7 @@
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import { prisma } from '@/libs/prisma';
-import TherapyCarousel from './(components)/TherapyCarousel';
+import TherapyCarousel from './TherapyCarousel';
 
 export default async function Services() {
   const cards = await prisma.therapy.findMany({ take: 5 });

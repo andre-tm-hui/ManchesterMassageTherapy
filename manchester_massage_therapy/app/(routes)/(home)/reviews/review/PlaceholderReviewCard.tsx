@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import StarRating from './StarRating';
-import Hyperlink from '../Hyperlink';
+import Hyperlink from '../../../../_components/shared/widgets/Hyperlink';
 import { chelseaMarket } from '@/app/fonts';
 import SpeechMark from './Speechmark';
 

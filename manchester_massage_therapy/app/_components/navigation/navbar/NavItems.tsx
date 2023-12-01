@@ -1,5 +1,5 @@
 import { usePathname } from 'next/navigation';
-import NoScrollLink from '../../shared/NoScrollLink';
+import NoScrollLink from '../../shared/widgets/NoScrollLink';
 
 const menuOptions = [
   { label: 'Home', href: '/' },

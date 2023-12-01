@@ -1,9 +1,9 @@
 'use client';
 
-import Logo from '../../shared/Logo';
-import BurgerMenu from '../../../../public/burgerMenu.svg';
+import Logo from '@/app/_components/shared/widgets/Logo';
+import BurgerMenu from '@/public/burgerMenu.svg';
 import { useEffect, useState } from 'react';
-import BookingButton from '../../shared/BookingButton';
+import BookingButton from '@/app/_components/shared/widgets/BookingButton';
 import { motion, useCycle } from 'framer-motion';
 import NavItems from './NavItems';
 

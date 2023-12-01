@@ -1,9 +1,9 @@
-import Splash from './Splash';
-import Reviews from './Reviews';
-import HowItWorks from './HowItWorks';
-import TeamPreview from './TeamPreview';
-import InstagramFeed from './InstagramFeed';
-import Services from './Services';
+import Splash from './splash';
+import Reviews from './reviews';
+import HowItWorks from './howItWorks';
+import TeamPreview from './teamPreview';
+import InstagramFeed from './instagramFeed';
+import Services from './services';
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
 import BGImageDiv from '@/app/_components/shared/BGImageDiv';
-import BookingButton from '@/app/_components/shared/BookingButton';
+import BookingButton from '@/app/_components/shared/widgets/BookingButton';
 import { chelseaMarket } from '@/app/fonts';
 
 export default function Splash() {

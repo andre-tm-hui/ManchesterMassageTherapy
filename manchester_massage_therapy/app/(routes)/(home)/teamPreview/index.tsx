@@ -1,11 +1,11 @@
-import MasseuseCard from './(components)/MasseuseCard';
+import MasseuseCard from './MasseuseCard';
 import { chelseaMarket } from '@/app/fonts';
 import Carousel from '@/app/_components/shared/carousel';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
-import Hyperlink from '@/app/_components/shared/Hyperlink';
-import ArrowSVG from '../../../public/arrow.svg';
+import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
+import ArrowSVG from '@/public/arrow.svg';
 import { prisma } from '@/libs/prisma';
-import PlaceholderMasseuseCard from './(components)/PlaceholderMasseuseCard';
+import PlaceholderMasseuseCard from './PlaceholderMasseuseCard';
 
 export default async function TeamPreview() {
   const masseuses = await prisma.practitioner

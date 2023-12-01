@@ -1,7 +1,7 @@
 import Carousel from '@/app/_components/shared/carousel';
-import Overlay from '@/app/_components/shared/Overlay';
-import PlaceholderReviewCard from '@/app/_components/shared/review/PlaceholderReviewCard';
-import ReviewCard from '@/app/_components/shared/review/ReviewCard';
+import Overlay from '@/app/_components/shared/widgets/Overlay';
+import PlaceholderReviewCard from '@/app/(routes)/(home)/reviews/review/PlaceholderReviewCard';
+import ReviewCard from '@/app/(routes)/(home)/reviews/review/ReviewCard';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import { prisma } from '@/libs/prisma';

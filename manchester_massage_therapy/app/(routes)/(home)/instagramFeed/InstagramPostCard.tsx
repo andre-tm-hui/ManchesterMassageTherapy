@@ -1,9 +1,9 @@
-import ConditionalWrapper from '@/app/_components/shared/ConditionalWrapper';
+import ConditionalWrapper from '@/app/_components/shared/widgets/ConditionalWrapper';
 import Carousel from '@/app/_components/shared/carousel';
 import Image from 'next/image';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { IGPost } from '@prisma/client';
-import Hyperlink from '@/app/_components/shared/Hyperlink';
+import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
 
 export default function InstagramPostCard({
   uid,

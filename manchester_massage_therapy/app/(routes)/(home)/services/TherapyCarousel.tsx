@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import TreatmentCard from './TreatmentCard';
 import Carousel from '@/app/_components/shared/carousel';
-import Overlay from '@/app/_components/shared/Overlay';
+import Overlay from '@/app/_components/shared/widgets/Overlay';
 import { Therapy } from '@prisma/client';
 
 interface TherapyCarouselProps {

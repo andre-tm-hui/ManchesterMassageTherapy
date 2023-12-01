@@ -1,8 +1,8 @@
 import { chelseaMarket } from '@/app/fonts';
-import PillButton from '@/app/_components/shared/PillButton';
-import InstagramMasonry from './(components)/InstagramMasonry';
+import PillButton from '@/app/_components/shared/widgets/PillButton';
+import InstagramMasonry from './InstagramMasonry';
 import SecondarySection from '@/app/_components/shared/section/SecondarySection';
-import Overlay from '@/app/_components/shared/Overlay';
+import Overlay from '@/app/_components/shared/widgets/Overlay';
 import { IGPost } from '@prisma/client';
 import { prisma } from '@/libs/prisma';
 

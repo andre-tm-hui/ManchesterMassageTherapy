@@ -1,11 +1,11 @@
-import SVGCard from '@/app/_components/shared/SVGCard';
+import SVGCard from '@/app/_components/shared/widgets/SVGCard';
 import { chelseaMarket } from '@/app/fonts';
-import BookingButton from '@/app/_components/shared/BookingButton';
-import SelectTreatmentSVG from '../../../public/assets/home/selectTreatment.svg';
-import ScheduleTreatmentSVG from '../../../public/assets/home/scheduleTreatment.svg';
-import RelaxSVG from '../../../public/assets/home/relax.svg';
+import BookingButton from '@/app/_components/shared/widgets/BookingButton';
+import SelectTreatmentSVG from '@/public/assets/home/selectTreatment.svg';
+import ScheduleTreatmentSVG from '@/public/assets/home/scheduleTreatment.svg';
+import RelaxSVG from '@/public/assets/home/relax.svg';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
-import Hyperlink from '@/app/_components/shared/Hyperlink';
+import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
 
 export default function HowItWorks() {
   return (

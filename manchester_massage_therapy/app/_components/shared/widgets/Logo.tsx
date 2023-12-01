@@ -1,5 +1,5 @@
 import ConditionalWrapper from './ConditionalWrapper';
-import MmtLogo from '../../../public/mmtLogo.svg';
+import MmtLogo from '@/public/mmtLogo.svg';
 import { ComponentProps } from 'react';
 import NoScrollLink from './NoScrollLink';
 

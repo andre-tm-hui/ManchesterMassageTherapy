@@ -1,4 +1,4 @@
-import Hyperlink from '@/app/_components/shared/Hyperlink';
+import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
 import { chelseaMarket } from '@/app/fonts';
 import { ComponentProps } from 'react';
 

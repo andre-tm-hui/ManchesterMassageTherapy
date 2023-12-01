@@ -1,8 +1,8 @@
 import { LinkProps } from 'next/link';
-import Logo from '../../shared/Logo';
+import Logo from '../../shared/widgets/Logo';
 import InstagramLogo from '@/public/assets/icons/instagram.svg';
 import { ComponentProps } from 'react';
-import NoScrollLink from '../../shared/NoScrollLink';
+import NoScrollLink from '../../shared/widgets/NoScrollLink';
 
 const footerItems = [
   {
