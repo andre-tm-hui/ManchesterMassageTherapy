@@ -25,6 +25,7 @@ export async function fetchInstagram() {
   const N = 30;
 
   const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`);
+  if (mediaResponse.data.error) { return; }
 
   const existingPosts = await prisma.iGPost.findMany({
     select: {
