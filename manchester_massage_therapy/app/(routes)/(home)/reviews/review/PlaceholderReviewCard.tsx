@@ -21,8 +21,8 @@ export default function PlaceholderReviewCard({
           src={'/blankProfile.jpg'}
           alt={''}
         />{' '}
-        <div className='ml-4 flex flex-col text-left'>
-          <div className='h-8 w-48 rounded-lg bg-primary' />
+        <div className='mx-4 flex w-full flex-col text-left'>
+          <div className='h-8 w-full rounded-lg bg-primary' />
           <div className='mt-1 h-4 w-24 rounded-lg bg-primary text-transparent' />
         </div>
         <StarRating className='ml-auto mr-0 gap-1' rating={0} />

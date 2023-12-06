@@ -26,7 +26,7 @@ export default function ReviewCard({
           src={profilePhotoUrl}
           alt={''}
         />{' '}
-        <div className='ml-4 flex flex-col text-left'>
+        <div className='mx-4 flex w-full flex-col text-left'>
           <p className='text-xl'>
             {isAnonymous ? 'Anonymous User' : displayName}
           </p>
