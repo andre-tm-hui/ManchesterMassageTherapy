@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { inter } from './fonts';
 import Navbar from './_components/navigation/navbar';
 import Footer from './_components/navigation/footer';
-import { AnimatePresence } from 'framer-motion';
 
 export const metadata: Metadata = {
   title: 'Manchester Massage Therapy',
