@@ -30,7 +30,7 @@ export async function fetchGoogleReview() {
 
   const response = await service.locations.reviews.list({
     parent: `locations/${process.env.GOOGLE_LOCATION_ID}`,
-  }).catch((_) => {return;});
+  }).catch(() => {return;});
 
   for (const review of response.data.reviews) {
     const existingReview = await prisma.googleReview.findUnique({
