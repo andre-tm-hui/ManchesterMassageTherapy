@@ -2,7 +2,7 @@ import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
 import { chelseaMarket } from '@/app/fonts';
 import { ComponentProps } from 'react';
 
-export default async function PlaceholderMasseuseCard({
+export default async function PlaceholderPractitionerCard({
   className,
 }: ComponentProps<'div'>) {
   const placeholderClass = 'rounded-lg bg-secondary text-transparent';

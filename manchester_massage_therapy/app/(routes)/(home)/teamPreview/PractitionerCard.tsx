@@ -4,7 +4,7 @@ import { Practitioner } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
 
-export default async function MasseuseCard({
+export default async function PractitionerCard({
   profilePhotoUrl,
   firstName,
   surname,
