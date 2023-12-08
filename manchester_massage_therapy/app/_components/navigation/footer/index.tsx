@@ -8,7 +8,7 @@ const footerItems = [
     links: [
       { href: './', text: 'Home' },
       { href: '/services', text: 'Services' },
-      { href: '/team', text: 'Meet the Team' },
+      //{ href: '/team', text: 'Meet the Team' },
       { href: '/safety', text: 'Safety' },
       { href: '/legal', text: 'Legal' },
     ],
@@ -16,7 +16,7 @@ const footerItems = [
   {
     title: 'Interested in Helping?',
     links: [
-      { href: '/careers', text: 'Join the Team' },
+      //{ href: '/careers', text: 'Join the Team' },
       { href: '/contact', text: 'Business Inquiries' },
     ],
   },
