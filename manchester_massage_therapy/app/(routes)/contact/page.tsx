@@ -8,7 +8,7 @@ import { inter } from '@/app/fonts';
 import { motion } from 'framer-motion';
 import { isEmailValid } from '@/libs/verification';
 import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
-import { sendEmails } from '@/libs/mailing';
+import POST from '@/app/api/contact/form/route';
 
 const labelStyles = 'flex w-full flex-col gap-2';
 
@@ -72,7 +72,17 @@ export default function Contact() {
 
     if (newValid.every((v) => v.length === 0)) {
       setSubmitted(true);
-      sendEmails(email, name, message, subject, phone);
+      fetch('./api/contact/form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          subject: subject,
+          message: message,
+        }),
+      });
     }
   };
 
