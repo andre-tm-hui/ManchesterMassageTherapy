@@ -8,7 +8,7 @@ let transporter = nodemailer.createTransport({
       pass: process.env.EMAIL_PASSWORD,
     }})
 
-export default function POST(req: any, res: any) {
+export async function POST(req: any, res: any) {
   let mailOptions = [
     {
       from: process.env.EMAIL_USERNAME,
