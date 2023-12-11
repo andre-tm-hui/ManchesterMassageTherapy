@@ -8,7 +8,7 @@ import { inter } from '@/app/fonts';
 import { motion } from 'framer-motion';
 import { isEmailValid } from '@/libs/verification';
 import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
-import POST from '@/app/api/contact/form/route';
+import { POST } from '@/app/api/contact/form/route';
 
 const labelStyles = 'flex w-full flex-col gap-2';
 
