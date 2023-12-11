@@ -4,7 +4,7 @@ import NoScrollLink from '../../shared/widgets/NoScrollLink';
 const menuOptions = [
   { label: 'Home', href: '/' },
   { label: 'Services & Packages', href: '/services' },
-  { label: 'Meet the Team', href: '/team' },
+  //{ label: 'Meet the Team', href: '/team' },
   { label: 'Get in Touch', href: '/contact' },
 ];
 
