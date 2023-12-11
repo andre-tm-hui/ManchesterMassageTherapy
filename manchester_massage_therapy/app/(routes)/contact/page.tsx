@@ -7,6 +7,8 @@ import HeaderAndComment from '@/app/_components/shared/widgets/HeaderAndComment'
 import { inter } from '@/app/fonts';
 import { motion } from 'framer-motion';
 import { isEmailValid } from '@/libs/verification';
+import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
+import { sendEmails } from '@/libs/mailing';
 
 const labelStyles = 'flex w-full flex-col gap-2';
 
@@ -70,8 +72,7 @@ export default function Contact() {
 
     if (newValid.every((v) => v.length === 0)) {
       setSubmitted(true);
-      // TODO: send email
-      console.log(email, name, phone, subject, message);
+      sendEmails(email, name, message, subject, phone);
     }
   };
 
@@ -188,6 +189,7 @@ export default function Contact() {
           </div>
         )}
       </PrimarySection>
+      <FadeToFooter />
     </div>
   );
 }
