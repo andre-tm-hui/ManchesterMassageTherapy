@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import StarSVG from 'public/star.svg';
+import StarSVG from '@/public/star.svg';
 
 interface StarRatingProps extends ComponentProps<'div'> {
   rating: number;

@@ -1,4 +1,4 @@
-import SpeechMarkSVG from 'public/speechmark.svg';
+import SpeechMarkSVG from '@/public/speechmark.svg';
 
 export default function SpeechMark(rotate: boolean) {
   return (
