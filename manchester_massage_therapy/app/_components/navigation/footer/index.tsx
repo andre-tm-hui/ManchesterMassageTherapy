@@ -76,10 +76,10 @@ export default function Footer() {
             </table>
           ))}
         </div>
-        <div className='h-px w-full bg-dividerLine'></div>
+        <div className='h-px w-full bg-zinc-600'></div>
         <div className='flex h-auto w-full justify-start py-3 align-middle'>
-          <Logo size='72px'></Logo>
-          <div className='m-auto w-1/2 text-center'>
+          <Logo className='text-logo' size='72px'></Logo>
+          <div className='m-auto w-1/2 text-center text-zinc-400'>
             Copyright © 2023 Manchester Massage Therapy
           </div>
           <div className='my-auto'>

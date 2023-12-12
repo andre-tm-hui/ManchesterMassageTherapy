@@ -81,7 +81,7 @@ export default function Navbar() {
         <div className='mx-auto flex h-full max-w-7xl items-center px-4 transition-all duration-100 ease-linear md:px-8'>
           <Logo
             href='/'
-            className='transition-all ease-linear hover:brightness-125'
+            className='text-logo transition-all ease-linear hover:brightness-125'
             size='60px'
           />
           <ul className='hidden flex-grow gap-x-3 font-bold md:ml-10 md:flex lg:gap-x-10'>
