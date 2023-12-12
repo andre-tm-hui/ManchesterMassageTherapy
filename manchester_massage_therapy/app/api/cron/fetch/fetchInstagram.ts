@@ -40,7 +40,6 @@ export async function fetchInstagram(): Promise<any> {
     const postResponse = await axios.get(`https://graph.instagram.com/${media.id}?access_token=${accessToken}`)
       .catch((_) => {return undefined});
     if (!postResponse || postResponse.data.error) { continue; }//return {status: 400, msg: "could not access instagram basic api" } }
-    console.log(postResponse.data);
     const post = postResponse.data;
 
     if (existingPosts.some(existingPost => existingPost.uid === media.id)) {
@@ -75,7 +74,7 @@ export async function fetchInstagram(): Promise<any> {
         uploadDate: new Date(media.timestamp),
         prefAspectRatio: smallestAspectRatio,
       },
-    }).catch((e) => {return undefined});
+    }).catch((e) => {console.log(e); return undefined;}).then(() => {console.log("success", media.id, post.text, mediaUrls, media.permalink, media.timestamp, smallestAspectRatio);});
     //if (!success) { return {status: 400, msg: "could not create post in database" } }
   }
 
