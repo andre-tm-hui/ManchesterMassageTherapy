@@ -107,9 +107,14 @@ export default function Navbar() {
           custom='100%'
           className='fixed left-0 top-0 z-[-10] h-screen w-screen bg-menu p-0 md:hidden'
         >
-          <div className='flex h-screen w-screen overflow-hidden overscroll-none'>
+          <div className='flex h-screen w-screen overflow-hidden'>
             <ul className='content-right my-16 flex h-auto w-full flex-col justify-center gap-8 px-12 pt-[72px] text-right text-2xl font-bold'>
-              <NavItems onClick={toggleShowMenu} />
+              <NavItems
+                onClick={() => {
+                  toggleShowMenu();
+                  document.body.style.overflow = showMenu ? 'scroll' : 'hidden';
+                }}
+              />
               <li className='mt-auto'>
                 <BookingButton className='w-40 px-6 py-3'></BookingButton>
               </li>
