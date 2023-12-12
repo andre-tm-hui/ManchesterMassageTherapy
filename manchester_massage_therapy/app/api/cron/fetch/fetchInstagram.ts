@@ -59,7 +59,7 @@ export async function fetchInstagram(): Promise<any> {
 
     let success = await prisma.iGPost.create({
       data: {
-        uid: media.id,
+        uid: parseInt(media.id),
         caption: media.caption,
         albumUrls: mediaUrls,
         postUrl: media.permalink,
