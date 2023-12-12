@@ -95,7 +95,7 @@ export default function Contact() {
         </HeaderAndComment>
       </AccentSection>
 
-      <PrimarySection className='m-auto max-w-5xl'>
+      <PrimarySection className='m-auto max-w-5xl p-8'>
         {!submitted ? (
           <form className='mt-[-2rem] flex flex-col gap-4 transition-colors duration-200 ease-in-out'>
             <div className='flex flex-col gap-4 md:flex-row'>
