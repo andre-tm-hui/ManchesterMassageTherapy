@@ -20,18 +20,20 @@ async function removeOldestReviews(count: number) {
   });
 }
 
-export async function fetchInstagram() {
+export async function fetchInstagram(): Promise<any> {
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
   const N = 30;
 
-  const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`);
-  if (mediaResponse.data.error) { return; }
+  const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`)
+    .catch((_) => {return undefined});
+  if (!mediaResponse || mediaResponse.data.error) { return {status: 400, msg: "could not access instagram basic api" } }
 
   const existingPosts = await prisma.iGPost.findMany({
     select: {
       uid: true
     }
-  });
+  }).catch((e) => {return undefined}).then((res) => {return res});
+  if (!existingPosts) { return {status: 400, msg: "could not access instagram basic api" } }
 
   for (const media of mediaResponse.data.data) {
     const postResponse = await axios.get(`${media.permalink}?fields=id,text,timestamp&access_token=${accessToken}`);
@@ -53,13 +55,15 @@ export async function fetchInstagram() {
 
     for (const url of mediaUrls) {
       const response = await fetch(url);
-      const buffer = await response.buffer();
+      const buffer = await response.arrayBuffer();
       const metadata = await sharp(buffer).metadata();
       const aspectRatio = metadata.width! / metadata.height!;
       smallestAspectRatio = Math.min(smallestAspectRatio, aspectRatio);
     }
 
-    await prisma.iGPost.create({
+    console.log(post, mediaUrls, smallestAspectRatio);
+
+    let success = await prisma.iGPost.create({
       data: {
         uid: post.id,
         caption: post.text,
@@ -68,13 +72,16 @@ export async function fetchInstagram() {
         uploadDate: new Date(post.timestamp),
         prefAspectRatio: smallestAspectRatio,
       },
-    });
+    }).catch((e) => {return undefined});
+    if (!success) { return {status: 400, msg: "could not create post in database" } }
   }
 
   const postCount = await prisma.iGPost.count();
   if (postCount > N) {
     await removeOldestReviews(postCount - N);
   }
+
+  return {status: 200, msg: "success"};
 }
 
 
