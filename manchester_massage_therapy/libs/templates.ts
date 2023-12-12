@@ -22,7 +22,7 @@ export const emptyTherapy: Therapy = {
 }
 
 export const emptyIGPost: IGPost = {
-  uid: -1,
+  uid: '-1',
   caption: '',
   albumUrls: [],
   uploadDate: new Date(Date.now()),
