@@ -21,7 +21,8 @@ export default function InstagramMasonry({
 
   let i = -1;
   while (instagramPosts.length < 16) {
-    instagramPosts.push({ ...emptyIGPost, uid: i-- });
+    instagramPosts.push({ ...emptyIGPost, uid: i.toString() });
+    i--;
   }
 
   return (
