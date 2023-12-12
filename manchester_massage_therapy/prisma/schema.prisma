@@ -33,7 +33,7 @@ model Therapy {
 }
 
 model IGPost {
-  uid             Int      @id
+  uid             String   @id
   caption         String?
   albumUrls       String[]
   uploadDate      DateTime
