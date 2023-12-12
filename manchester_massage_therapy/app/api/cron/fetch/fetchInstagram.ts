@@ -24,7 +24,7 @@ export async function fetchInstagram(): Promise<any> {
   const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
   const N = 30;
 
-  const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`)
+  const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`)
     .catch((_) => {return undefined});
   if (!mediaResponse || mediaResponse.data.error) { return {status: 400, msg: "could not access instagram basic api" } }
   console.log(mediaResponse.data);
@@ -37,10 +37,10 @@ export async function fetchInstagram(): Promise<any> {
   if (!existingPosts) { return {status: 400, msg: "could not access instagram basic api" } }
 
   for (const media of mediaResponse.data.data) {
-    const postResponse = await axios.get(`https://graph.instagram.com/${media.id}?access_token=${accessToken}`)
+    /*const postResponse = await axios.get(`https://graph.instagram.com/${media.id}?fields=caption&access_token=${accessToken}`)
       .catch((_) => {return undefined});
     if (!postResponse || postResponse.data.error) { continue; }//return {status: 400, msg: "could not access instagram basic api" } }
-    const post = postResponse.data;
+    const post = postResponse.data;*/
 
     if (existingPosts.some(existingPost => existingPost.uid === media.id)) {
       break;
@@ -49,7 +49,7 @@ export async function fetchInstagram(): Promise<any> {
     let mediaUrls = [media.media_url];
 
     if (media.media_type === 'CAROUSEL_ALBUM') {
-      const childrenResponse = await axios.get(`https://graph.instagram.com/${media.id}/children?access_token=${accessToken}`);
+      const childrenResponse = await axios.get(`https://graph.instagram.com/${media.id}/children?fields=media_url&access_token=${accessToken}`);
       mediaUrls = childrenResponse.data.data.map((child: any) => child.media_url);
     }
 
@@ -68,13 +68,13 @@ export async function fetchInstagram(): Promise<any> {
     let success = await prisma.iGPost.create({
       data: {
         uid: media.id,
-        caption: post.text,
+        caption: media.text,
         albumUrls: mediaUrls,
         postUrl: media.permalink,
         uploadDate: new Date(media.timestamp),
         prefAspectRatio: smallestAspectRatio,
       },
-    }).catch((e) => {console.log(e); return undefined;}).then(() => {console.log("success", media.id, post.text, mediaUrls, media.permalink, media.timestamp, smallestAspectRatio);});
+    }).catch((e) => {console.log(e); return undefined;}).then(() => {console.log("success", media.id, media.text, mediaUrls, media.permalink, media.timestamp, smallestAspectRatio);});
     //if (!success) { return {status: 400, msg: "could not create post in database" } }
   }
 
