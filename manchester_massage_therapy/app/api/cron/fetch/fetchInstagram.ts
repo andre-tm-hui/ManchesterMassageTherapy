@@ -27,6 +27,7 @@ export async function fetchInstagram(): Promise<any> {
   const mediaResponse = await axios.get(`https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=${accessToken}&limit=${N}`)
     .catch((_) => {return undefined});
   if (!mediaResponse || mediaResponse.data.error) { return {status: 400, msg: "could not access instagram basic api" } }
+  console.log(mediaResponse.data);
 
   const existingPosts = await prisma.iGPost.findMany({
     select: {
@@ -36,8 +37,10 @@ export async function fetchInstagram(): Promise<any> {
   if (!existingPosts) { return {status: 400, msg: "could not access instagram basic api" } }
 
   for (const media of mediaResponse.data.data) {
-    const postResponse = await axios.get(`${media.permalink}?fields=id,text,timestamp&access_token=${accessToken}`);
-
+    const postResponse = await axios.get(`${media.permalink}?fields=id,text,timestamp&access_token=${accessToken}`)
+      .catch((_) => {return undefined});
+    if (!postResponse || postResponse.data.error) { return {status: 400, msg: "could not access instagram basic api" } }
+    console.log(postResponse.data);
     const post = postResponse.data;
 
     if (existingPosts.some(existingPost => existingPost.uid === post.id)) {
