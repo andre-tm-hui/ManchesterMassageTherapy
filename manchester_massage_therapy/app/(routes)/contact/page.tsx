@@ -8,7 +8,7 @@ import { inter } from '@/app/fonts';
 import { motion } from 'framer-motion';
 import { isEmailValid } from '@/libs/verification';
 import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
-import { POST } from '@/app/api/contact/form/route';
+import { useSearchParams } from 'next/navigation';
 
 const labelStyles = 'flex w-full flex-col gap-2';
 
@@ -33,6 +33,8 @@ const formVariants = {
 };
 
 export default function Contact() {
+  const search = useSearchParams();
+
   const [valid, setValid] = useState(['', '', '', '']);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
@@ -40,13 +42,14 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [emailAnimating, setEmailAnimating] = useState(false);
   const [phone, setPhone] = useState('');
-  const [subject, setSubject] = useState('');
+  const [subject, setSubject] = useState(search.get('subject') ?? '');
   const [subjectAnimating, setSubjectAnimating] = useState(false);
   const [message, setMessage] = useState('');
   const [messageAnimating, setMessageAnimating] = useState(false);
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
+
     const newValid = ['', '', '', ''];
     if (!name) {
       newValid[0] = "Can't be empty";
@@ -71,8 +74,7 @@ export default function Contact() {
     setValid(newValid);
 
     if (newValid.every((v) => v.length === 0)) {
-      setSubmitted(true);
-      fetch('./api/contact/form', {
+      const response = await fetch('/api/contact/form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -83,15 +85,23 @@ export default function Contact() {
           message: message,
         }),
       });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        // TODO: Handle error via error message
+      }
     }
   };
 
   return (
-    <div className='flex min-h-screen flex-col'>
+    <div className='flex flex-col'>
       <AccentSection className='mt-12'>
         <HeaderAndComment className='m-auto max-w-5xl' title='Contact Us'>
-          Questions about the service? Not sure what you need? Let us know how
-          we could help you!
+          Questions about the service? Not sure what you need? Use the form
+          below, or call us at{' '}
+          <span className='text-accent brightness-150'>+44 7748 010179</span>,
+          and let us know how we can help!
         </HeaderAndComment>
       </AccentSection>
 
@@ -161,6 +171,7 @@ export default function Contact() {
                   <option value='' hidden>
                     Select a subject
                   </option>
+                  <option>Booking</option>
                   <option>Services</option>
                   <option>Business Inquiries</option>
                   <option>Feedback</option>
@@ -187,7 +198,7 @@ export default function Contact() {
               ></motion.textarea>
             </label>
             <button
-              className='mt-8 h-12 w-full rounded-full bg-bookingButtonIdle text-bookingButton transition-colors duration-300 ease-in-out hover:bg-bookingButtonHover'
+              className='z-10 mt-8 h-12 w-full rounded-full bg-bookingButtonIdle text-bookingButton transition-colors duration-300 ease-in-out hover:bg-bookingButtonHover'
               onClick={onSubmit}
             >
               Submit
