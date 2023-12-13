@@ -18,7 +18,7 @@ export default function Logo({ href, className, size }: LogoProps) {
       )}
     >
       <MmtLogo
-        className={!href && className}
+        className={!href ? className : undefined}
         width={size}
         height={size}
         color='var(--logo-rgb)'
