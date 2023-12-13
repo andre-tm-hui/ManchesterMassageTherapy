@@ -10,7 +10,7 @@ export default function FadeToFooter() {
             rgba(0, 0, 0, 0) 100%
           )`,
       }}
-      className='mt-[-16rem] h-[25rem] w-full'
+      className='pointer-events-none mt-[-16rem] h-[25rem] w-full'
     />
   );
 }
