@@ -33,8 +33,11 @@ export async function POST(req: Request) {
     }
   ]
 
+  console.log(transporter, mailOptions);
+
   mailOptions.forEach(mailOption => {
     transporter.sendMail(mailOption, function(error, info){
+      console.log(error, info);
       if (error) {
         return Response.json({ message: error, status: 400 });
       } else {
