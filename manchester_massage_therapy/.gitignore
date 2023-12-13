@@ -40,3 +40,5 @@ prisma/migrations
 package-lock.json
 
 .vscode
+
+/app/api/database
