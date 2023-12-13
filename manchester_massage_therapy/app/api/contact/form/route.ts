@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 export const dynamic = 'force-dynamic'
 
-let transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
     port: parseInt(process.env.EMAIL_PORT!),
     host: process.env.EMAIL_HOST,
     auth: {
@@ -11,6 +11,17 @@ let transporter = nodemailer.createTransport({
     }})
 
 export async function POST(req: Request) {
+  await new Promise((resolve, reject) => {
+    transporter.verify(function(error, success) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("Server is ready to take our messages");
+        resolve(success);
+      }
+  })});
+
    const { name, email, phone, subject, message } = await req.json();
    let mailOptions = [
     {
@@ -33,18 +44,19 @@ export async function POST(req: Request) {
     }
   ]
 
-  console.log(transporter, mailOptions);
-
-  mailOptions.forEach(mailOption => {
-    transporter.sendMail(mailOption, function(error, info){
-      console.log(error, info);
-      if (error) {
-        return Response.json({ message: error, status: 400 });
-      } else {
-        console.log('Email sent: ' + info.response)
-      }
-    })    
+  mailOptions.forEach(async (mailOption) => {
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOption, (error, info) => {
+        if (error) {
+          console.error(error);
+          reject(error);
+        } else {
+          console.log(info);
+          resolve(info);
+        }
+      })
+    })
   });
 
-  return Response.json({ message: "success", status: 200 });
+  return Response.json({ message: "OK", status: 200 });
 }
