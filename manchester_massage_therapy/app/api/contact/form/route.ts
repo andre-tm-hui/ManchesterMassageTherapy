@@ -22,9 +22,10 @@ export async function POST(req: Request) {
       }
   })});
 
-   const { name, email, phone, subject, message } = await req.json();
-   let mailOptions = [
-    {
+  const { name, email, phone, subject, message } = await req.json();
+
+  await new Promise((resolve, reject) => {
+    transporter.sendMail({
       from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
       to: email,
       subject: `Thanks for getting in touch, ${name}!`,
@@ -35,17 +36,7 @@ export async function POST(req: Request) {
       \n\nBest regards, 
       \nThe team at Manchester Massage Therapy
       \n\n\nFeel free to reply to this email if you missed anything in your original message.`
-    }, 
-    {
-      from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
-      to: process.env.EMAIL_USERNAME,
-      subject: `New message from ${name}: ${subject}`,
-      text: `Name: ${name} \n Email: ${email} \n Phone: ${phone ?? 'N/A'} \n Message: ${message}`
-    }
-  ]
-
-  await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions[0], (error, info) => {
+    }, (error, info) => {
       if (error) {
         console.error(error);
         reject(error);
@@ -57,7 +48,12 @@ export async function POST(req: Request) {
   })
 
   await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions[1], (error, info) => {
+    transporter.sendMail({
+      from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
+      to: process.env.EMAIL_USERNAME,
+      subject: `New message from ${name}: ${subject}`,
+      text: `Name: ${name} \n Email: ${email} \n Phone: ${phone ?? 'N/A'} \n Message: ${message}`
+    }, (error, info) => {
       if (error) {
         console.error(error);
         reject(error);
