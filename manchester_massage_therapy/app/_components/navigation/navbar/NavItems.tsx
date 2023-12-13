@@ -1,5 +1,6 @@
 import { usePathname } from 'next/navigation';
 import NoScrollLink from '../../shared/widgets/NoScrollLink';
+import { MouseEventHandler } from 'react';
 
 const menuOptions = [
   { label: 'Home', href: '/' },
@@ -8,7 +9,11 @@ const menuOptions = [
   { label: 'Get in Touch', href: '/contact' },
 ];
 
-export default function NavItems({ onClick }: { onClick?: () => void }) {
+export default function NavItems({
+  onClick,
+}: {
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+}) {
   const path = usePathname();
   return (
     <>

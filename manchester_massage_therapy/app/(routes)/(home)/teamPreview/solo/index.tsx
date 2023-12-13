@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Solo() {
   return (
     <AccentSection className='mx-auto flex w-full max-w-5xl flex-col-reverse justify-center pt-0 md:flex-row-reverse md:pt-8'>
-      <div className='my-auto flex w-full flex-col justify-center gap-5 text-left md:w-[65%] md:pb-0'>
+      <div className='my-auto flex w-full flex-col justify-center gap-5 px-8 text-center md:w-[65%] md:px-2 md:pb-0 md:text-left'>
         <h1
           className={`text-5xl text-secondary md:text-7xl ${chelseaMarket.className}`}
         >

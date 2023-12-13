@@ -19,3 +19,10 @@ export function getYears(joinDate: Date) {
   ).toFixed(0);
 }
 
+export async function scrollToTop(window: Window) {
+  const scrollStep = -100;
+  while (window.scrollY > 0) { 
+    window.scrollBy(0, scrollStep);
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+}

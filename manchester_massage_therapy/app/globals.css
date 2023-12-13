@@ -61,10 +61,14 @@
   }
 }
 
+html {
+  --scroll-behavior: smooth!important;
+  scroll-behavior: smooth!important;
+}
+
 body {
   color: var(--text-primary-color);
   background-color: var(--primary-bg);
-  scroll-behavior: smooth;
 }
 
 .embla__container {
