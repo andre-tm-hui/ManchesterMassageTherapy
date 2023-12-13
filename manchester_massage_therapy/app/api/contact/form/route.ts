@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     }
   ]
 
-  mailOptions.forEach(async (mailOption) => {
+  await mailOptions.forEach(async (mailOption) => {
     await new Promise((resolve, reject) => {
       transporter.sendMail(mailOption, (error, info) => {
         if (error) {
