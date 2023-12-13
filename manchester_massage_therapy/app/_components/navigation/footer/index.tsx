@@ -17,7 +17,10 @@ const footerItems = [
     title: 'Interested in Helping?',
     links: [
       //{ href: '/careers', text: 'Join the Team' },
-      { href: '/contact', text: 'Business Inquiries' },
+      {
+        href: '/contact?subject=Business Inquiries',
+        text: 'Business Inquiries',
+      },
     ],
   },
   {
