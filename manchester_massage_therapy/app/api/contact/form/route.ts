@@ -44,19 +44,29 @@ export async function POST(req: Request) {
     }
   ]
 
-  await mailOptions.forEach(async (mailOption) => {
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(mailOption, (error, info) => {
-        if (error) {
-          console.error(error);
-          reject(error);
-        } else {
-          console.log(info);
-          resolve(info);
-        }
-      })
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions[0], (error, info) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
     })
-  });
+  })
+
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions[1], (error, info) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
+    })
+  })
 
   return Response.json({ message: "OK", status: 200 });
 }
