@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,12 +21,7 @@ export default function Layout(props: PropsWithChildren<{}>) {
   const pathname = usePathname();
 
   return (
-    <AnimatePresence
-      mode='wait'
-      onExitComplete={() => {
-        window.scrollTo({ top: 0 });
-      }}
-    >
+    <AnimatePresence mode='wait'>
       <motion.div
         key={pathname}
         initial={{ opacity: 0, x: '-100%' }}

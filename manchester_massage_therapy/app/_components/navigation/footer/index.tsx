@@ -17,7 +17,10 @@ const footerItems = [
     title: 'Interested in Helping?',
     links: [
       //{ href: '/careers', text: 'Join the Team' },
-      { href: '/contact', text: 'Business Inquiries' },
+      {
+        href: '/contact?subject=Business Inquiries',
+        text: 'Business Inquiries',
+      },
     ],
   },
   {
@@ -77,8 +80,8 @@ export default function Footer() {
           ))}
         </div>
         <div className='h-px w-full bg-zinc-600'></div>
-        <div className='flex h-auto w-full justify-start py-3 align-middle'>
-          <Logo className='text-logo' size='72px'></Logo>
+        <div className='flex h-auto w-full justify-start py-4 align-middle'>
+          <Logo className='text-logo saturate-50' size='48px'></Logo>
           <div className='m-auto w-1/2 text-center text-zinc-400'>
             Copyright © 2023 Manchester Massage Therapy
           </div>

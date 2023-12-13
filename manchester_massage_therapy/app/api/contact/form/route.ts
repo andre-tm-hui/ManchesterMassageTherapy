@@ -1,42 +1,68 @@
 import nodemailer from 'nodemailer';
 
-let transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
+export const dynamic = 'force-dynamic'
+
+const transporter = nodemailer.createTransport({
+    port: parseInt(process.env.EMAIL_PORT!),
+    host: process.env.EMAIL_HOST,
     auth: {
       user: process.env.EMAIL_USERNAME,
       pass: process.env.EMAIL_PASSWORD,
     }})
 
-export async function POST(req: any, res: any) {
-  let mailOptions = [
-    {
-      from: process.env.EMAIL_USERNAME,
-      to: req.email,
-      subject: `Thanks for getting in touch, ${req.name}!`,
+export async function POST(req: Request) {
+  await new Promise((resolve, reject) => {
+    transporter.verify(function(error, success) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log("Server is ready to take our messages");
+        resolve(success);
+      }
+  })});
+
+  const { name, email, phone, subject, message } = await req.json();
+
+  await new Promise((resolve, reject) => {
+    transporter.sendMail({
+      from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
+      to: email,
+      subject: `Thanks for getting in touch, ${name}!`,
       text: 
-      `Hi ${req.name}!
+      `Hi ${name}!
       \n\nThanks for getting in touch. We'll get back to you as soon as possible. 
-      \n\nFor your reference, your message was: \n\nSubject: ${req.subject}\n${req.message}
+      \n\nFor your reference, your message was: \n\nSubject: ${subject}\n${message}
       \n\nBest regards, 
       \nThe team at Manchester Massage Therapy
       \n\n\nFeel free to reply to this email if you missed anything in your original message.`
-    }, 
-    {
-      from: process.env.EMAIL_USERNAME,
-      to: process.env.EMAIL_USERNAME,
-      subject: `New message from ${req.name}: ${req.subject}`,
-      text: `Name: ${req.name} \n Email: ${req.email} \n Phone: ${req.phone ?? 'N/A'} \n Message: ${req.message}`
-    }
-  ]
-
-  mailOptions.forEach(mailOption => {
-    transporter.sendMail(mailOption, function(error, info){
+    }, (error, info) => {
       if (error) {
-        console.log(error);
+        console.error(error);
+        reject(error);
       } else {
-        console.log('Email sent: ' + info.response)
+        console.log(info);
+        resolve(info);
       }
-    })    
-  });
+    })
+  })
+
+  await new Promise((resolve, reject) => {
+    transporter.sendMail({
+      from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
+      to: process.env.EMAIL_USERNAME,
+      subject: `New message from ${name}: ${subject}`,
+      text: `Name: ${name} \n Email: ${email} \n Phone: ${phone ?? 'N/A'} \n Message: ${message}`
+    }, (error, info) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
+    })
+  })
+
+  return Response.json({ message: "OK", status: 200 });
 }
