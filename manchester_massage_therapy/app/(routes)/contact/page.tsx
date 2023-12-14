@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { isEmailValid } from '@/libs/verification';
 import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
 import { useSearchParams } from 'next/navigation';
+import Overlay from '@/app/_components/shared/widgets/Overlay';
 
 const labelStyles = 'flex w-full flex-col gap-2';
 
@@ -35,8 +36,8 @@ const formVariants = {
 export default function Contact() {
   const search = useSearchParams();
 
+  const [formState, setFormState] = useState('idle'); // idle, submitting, submitted
   const [valid, setValid] = useState(['', '', '', '']);
-  const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [nameAnimating, setNameAnimating] = useState(false);
   const [email, setEmail] = useState('');
@@ -74,6 +75,7 @@ export default function Contact() {
     setValid(newValid);
 
     if (newValid.every((v) => v.length === 0)) {
+      setFormState('submitting');
       const response = await fetch('/api/contact/form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -87,9 +89,9 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        setSubmitted(true);
+        setFormState('submitted');
       } else {
-        // TODO: Handle error via error message
+        setFormState(response.statusText);
       }
     }
   };
@@ -105,109 +107,132 @@ export default function Contact() {
         </HeaderAndComment>
       </AccentSection>
 
-      <PrimarySection className='m-auto max-w-5xl p-8'>
-        {!submitted ? (
-          <form className='mt-[-2rem] flex flex-col gap-4 transition-colors duration-200 ease-in-out'>
-            <div className='flex flex-col gap-4 md:flex-row'>
-              <label className={`md:w-1/2 ${labelStyles}`}>
+      <PrimarySection className='relative m-auto p-8'>
+        {formState === 'submitted' ? (
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className='text-bold w-full text-center text-2xl'
+          >
+            We&apos;ll get in touch ASAP!
+          </motion.div>
+        ) : (
+          <>
+            <form className='mx-auto mt-[-2rem] flex max-w-5xl flex-col gap-4 transition-colors duration-200 ease-in-out'>
+              <div className='flex flex-col gap-4 md:flex-row'>
+                <label className={`md:w-1/2 ${labelStyles}`}>
+                  <div>
+                    Name:
+                    <span className={errorStyles(!valid[0])}>
+                      *{valid[0] || 'required'}
+                    </span>
+                  </div>
+                  <motion.input
+                    variants={formVariants}
+                    animate={nameAnimating ? 'error' : 'idle'}
+                    value={name}
+                    className={`h-8 ${formStyles}`}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
+                <label className={`md:w-1/2 ${labelStyles}`}>
+                  <div>
+                    Email Address:
+                    <span className={errorStyles(!valid[1])}>
+                      *{valid[1] || 'required'}
+                    </span>
+                  </div>
+                  <motion.input
+                    variants={formVariants}
+                    animate={emailAnimating ? 'error' : 'idle'}
+                    value={email}
+                    className={`h-8 ${formStyles}`}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className='flex flex-col gap-4 md:flex-row'>
+                <label className={`md:w-1/2 ${labelStyles}`}>
+                  Phone Number:
+                  <input
+                    className={`h-8 ${formStyles}`}
+                    value={phone}
+                    onChange={(e) => {
+                      const re = /^[0-9\=]+$/;
+                      if (e.target.value === '' || re.test(e.target.value)) {
+                        setPhone(e.target.value);
+                      }
+                    }}
+                  />
+                </label>
+                <label className={`md:w-1/2 ${labelStyles}`}>
+                  <div>
+                    Subject:
+                    <span className={errorStyles(!valid[2])}>
+                      *{valid[2] || 'required'}
+                    </span>
+                  </div>
+                  <motion.select
+                    variants={formVariants}
+                    animate={subjectAnimating ? 'error' : 'idle'}
+                    value={subject}
+                    className={`h-8 ${formStyles} text-sm ${inter.className}`}
+                    onChange={(e) => setSubject(e.target.value)}
+                  >
+                    <option value='' hidden>
+                      Select a subject
+                    </option>
+                    <option>Booking</option>
+                    <option>Services</option>
+                    <option>Business Inquiries</option>
+                    <option>Feedback</option>
+                    <option>Complaint</option>
+                    <option>Special Requests</option>
+                    <option>Other</option>
+                  </motion.select>
+                </label>
+              </div>
+              <label className={labelStyles}>
                 <div>
                   Name:
-                  <span className={errorStyles(!valid[0])}>
-                    *{valid[0] || 'required'}
+                  <span className={errorStyles(!valid[3])}>
+                    *{valid[3] || 'required'}
                   </span>
                 </div>
-                <motion.input
+                <motion.textarea
                   variants={formVariants}
-                  animate={nameAnimating ? 'error' : 'idle'}
-                  value={name}
-                  className={`h-8 ${formStyles}`}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                  animate={messageAnimating ? 'error' : 'idle'}
+                  className={`h-64 ${formStyles}`}
+                  value={message}
+                  style={{ resize: 'none' }}
+                  onChange={(e) => setMessage(e.target.value)}
+                ></motion.textarea>
               </label>
-              <label className={`md:w-1/2 ${labelStyles}`}>
-                <div>
-                  Email Address:
-                  <span className={errorStyles(!valid[1])}>
-                    *{valid[1] || 'required'}
-                  </span>
+              <button
+                className='z-10 mt-8 h-12 w-full rounded-full bg-bookingButtonIdle text-bookingButton transition-colors duration-300 ease-in-out hover:bg-bookingButtonHover'
+                onClick={onSubmit}
+              >
+                Submit
+              </button>
+              {formState !== 'idle' && formState !== 'submitting' && (
+                <div className='mx-auto w-full text-center text-red-700'>
+                  {formState}
                 </div>
-                <motion.input
-                  variants={formVariants}
-                  animate={emailAnimating ? 'error' : 'idle'}
-                  value={email}
-                  className={`h-8 ${formStyles}`}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className='flex flex-col gap-4 md:flex-row'>
-              <label className={`md:w-1/2 ${labelStyles}`}>
-                Phone Number:
-                <input
-                  className={`h-8 ${formStyles}`}
-                  value={phone}
-                  onChange={(e) => {
-                    const re = /^[0-9\=]+$/;
-                    if (e.target.value === '' || re.test(e.target.value)) {
-                      setPhone(e.target.value);
-                    }
-                  }}
-                />
-              </label>
-              <label className={`md:w-1/2 ${labelStyles}`}>
-                <div>
-                  Subject:
-                  <span className={errorStyles(!valid[2])}>
-                    *{valid[2] || 'required'}
-                  </span>
-                </div>
-                <motion.select
-                  variants={formVariants}
-                  animate={subjectAnimating ? 'error' : 'idle'}
-                  value={subject}
-                  className={`h-8 ${formStyles} text-sm ${inter.className}`}
-                  onChange={(e) => setSubject(e.target.value)}
+              )}
+            </form>
+            {formState === 'submitting' && (
+              <Overlay className='z-20 ml-[-2rem] flex bg-black/25'>
+                <div
+                  className='m-auto h-12 w-12 animate-spin rounded-full border-8 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+                  role='status'
                 >
-                  <option value='' hidden>
-                    Select a subject
-                  </option>
-                  <option>Booking</option>
-                  <option>Services</option>
-                  <option>Business Inquiries</option>
-                  <option>Feedback</option>
-                  <option>Complaint</option>
-                  <option>Special Requests</option>
-                  <option>Other</option>
-                </motion.select>
-              </label>
-            </div>
-            <label className={labelStyles}>
-              <div>
-                Name:
-                <span className={errorStyles(!valid[3])}>
-                  *{valid[3] || 'required'}
-                </span>
-              </div>
-              <motion.textarea
-                variants={formVariants}
-                animate={messageAnimating ? 'error' : 'idle'}
-                className={`h-64 ${formStyles}`}
-                value={message}
-                style={{ resize: 'none' }}
-                onChange={(e) => setMessage(e.target.value)}
-              ></motion.textarea>
-            </label>
-            <button
-              className='z-10 mt-8 h-12 w-full rounded-full bg-bookingButtonIdle text-bookingButton transition-colors duration-300 ease-in-out hover:bg-bookingButtonHover'
-              onClick={onSubmit}
-            >
-              Submit
-            </button>
-          </form>
-        ) : (
-          <div className='text-bold w-full text-center text-2xl'>
-            We&apos;ll get in touch ASAP!
-          </div>
+                  <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
+                    Loading...
+                  </span>
+                </div>
+              </Overlay>
+            )}
+          </>
         )}
       </PrimarySection>
       <FadeToFooter />
