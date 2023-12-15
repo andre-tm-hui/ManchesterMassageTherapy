@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 
+// TODO: add timeout based on IP? captcha? just to prevent spam
 export const dynamic = 'force-dynamic'
 
 const transporter = nodemailer.createTransport({
