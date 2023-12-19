@@ -4,19 +4,13 @@ import Image from 'next/image';
 import { ComponentProps } from 'react';
 import { isMobile } from 'react-device-detect';
 
-interface TreatmentCardProps extends ComponentProps<'div'>, Therapy {
-  flipped?: undefined | boolean;
-}
-
 export default function TreatmentCard({
   className,
   name,
   description,
   bookingUrl,
   coverImageUrl,
-  flipped,
-  onClick,
-}: TreatmentCardProps) {
+}: ComponentProps<'div'> & Therapy) {
   const containerClassNames = [
     'relative',
     'h-full',
@@ -26,12 +20,10 @@ export default function TreatmentCard({
     'duration-500',
     '[transform-style:preserve-3d]',
     'group-hover:[transform:rotateY(180deg)]',
-    isMobile && flipped ? '[transform:rotateY(180deg)]' : undefined,
   ];
 
   return (
     <div
-      onClick={onClick}
       className={`group aspect-square w-72 cursor-default  [perspective:1000px] selection:bg-transparent ${className}`}
     >
       <div className={containerClassNames.join(' ')}>

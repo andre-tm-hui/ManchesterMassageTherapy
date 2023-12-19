@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import TreatmentCard from './TreatmentCard';
 import Carousel from '@/app/_components/shared/carousel';
 import Overlay from '@/app/_components/shared/widgets/Overlay';
@@ -11,24 +8,12 @@ interface TherapyCarouselProps {
 }
 
 export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
-  const [flipped, setFlipped] = useState(
-    new Array<boolean>(cards.length).fill(false)
-  );
-
-  const flipCard = (idx: number) => {
-    const newFlipped = new Array<boolean>(cards.length).fill(false);
-    newFlipped[idx] = true;
-    setFlipped(newFlipped);
-  };
-
   const cardComponents = cards.map((c, idx) => {
     return (
       <TreatmentCard
         className='mr-5 flex-[0_0_16em] md:mr-0 md:flex-[0_0_20em]'
         key={c.uid}
         {...c}
-        flipped={flipped[idx]}
-        onClick={(_) => flipCard(idx)}
       ></TreatmentCard>
     );
   });
