@@ -24,7 +24,7 @@ export default function TreatmentCard({
 
   return (
     <div
-      className={`group aspect-square w-72 cursor-default  [perspective:1000px] selection:bg-transparent ${className}`}
+      className={`group aspect-square cursor-default [perspective:1000px] selection:bg-transparent ${className}`}
     >
       <div className={containerClassNames.join(' ')}>
         <div className='absolute inset-0 shadow-xl'>
@@ -50,7 +50,7 @@ export default function TreatmentCard({
           />
           <div className='absolute z-10 flex h-full w-full flex-col justify-center gap-4 p-6 text-left text-sm'>
             <h2>{name}</h2>
-            <p className='line-clamp-6'>{description}</p>
+            <p className='line-clamp-[10]'>{description}</p>
             <a
               className='text-logo transition-all duration-200 hover:brightness-125'
               href={bookingUrl}
