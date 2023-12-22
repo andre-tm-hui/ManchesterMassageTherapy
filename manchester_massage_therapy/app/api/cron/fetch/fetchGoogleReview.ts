@@ -1,5 +1,23 @@
 import { prisma } from '@/libs/prisma';
+import axios from 'axios';
 import { google } from 'googleapis';
+
+function ratingToNumber(text: string) {
+  switch (text) {
+    case 'FIVE':
+      return 5;
+    case 'FOUR':
+      return 4;
+    case 'THREE':
+      return 3;
+    case 'TWO':
+      return 2;
+    case 'ONE':
+      return 1;
+    default:
+      return 0;
+  }
+}
 
 async function removeOldestReviews(count: number) {
   const reviews = await prisma.googleReview.findMany({ orderBy: { createTime: 'asc' }, take: count });
@@ -18,21 +36,63 @@ async function removeOldestReviews(count: number) {
 /** fetch a list of google reviews, and adds new ones to a postgreSQL database under the GoogleReview table */
 
 export async function fetchGoogleReview() {
-  const googleMMT = google.mmtBusinessInformation_v1.mmtBusinessInformation;
-
-  const auth = new google.auth.JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
-    scopes: ['https://www.googleapis.com/auth/business.manage'],
+  let refreshed = '';
+  let token = '';
+  const oauth2Client = new google.auth.OAuth2({
+    clientId: process.env.GOOGLE_BP_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_BP_CLIENT_SECRET,
+    redirectUri: 'https://manchestermassagetherapy.co.uk',
   });
+  oauth2Client.setCredentials({refresh_token: process.env.GOOGLE_BP_REFRESH_TOKEN});
+  await oauth2Client.refreshAccessToken((err, res) => {
+    if (err) {
+      console.error("Error refreshing access token: ", err);
+      refreshed = "Error refreshing access token: " + err;
+      return;
+    }
+    if (!res || !res.access_token) {
+      console.error("No tokens returned from refresh request");
+      refreshed = "No tokens returned from refresh request";
+      return;
+    }
 
-  const service = new googleMMT({ version: 'v1', auth });
+    token = res.access_token;
+    refreshed = "Successfully refreshed access token";
+  });
+  while (refreshed === '') { await new Promise(r => setTimeout(r, 100)); }
 
-  const response = await service.locations.reviews.list({
-    parent: `locations/${process.env.GOOGLE_LOCATION_ID}`,
-  }).catch(() => {return;});
+  /*const authUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: ['https://www.googleapis.com/auth/business.manage'],
+  });*/
+  
+  // get all locations
+  const locations = (await google.mybusinessbusinessinformation(
+    { version: 'v1', auth: oauth2Client }
+  ).accounts.locations.list({parent: 'accounts/' + process.env.GOOGLE_BP_ACCOUNT_ID, readMask: 'name'})).data.locations;
+  if (!locations) {
+    return { status: 400, msg: 'No locations found' };
+  }
 
-  for (const review of response.data.reviews) {
+  // get reviews from all locations
+  let response = await axios.post(
+    `https://mybusiness.googleapis.com/v4/accounts/${process.env.GOOGLE_BP_ACCOUNT_ID}/locations:batchGetReviews`, 
+    {
+      'locationNames': locations.map(location => `accounts/${process.env.GOOGLE_BP_ACCOUNT_ID}/${location.name}`),
+      'pageSize': 20,
+      'orderBy': 'updateTime desc',
+      'ignoreRatingOnlyReviews': true,
+    },
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+        }
+    }
+  );
+
+  // update existing reviews
+  for (const locationReview of response.data.locationReviews) {
+    const review = locationReview.review;
     const existingReview = await prisma.googleReview.findUnique({
       where: {
         uid: review.reviewId,
@@ -45,9 +105,9 @@ export async function fetchGoogleReview() {
           uid: review.reviewId,
           profilePhotoUrl: review.reviewer.profilePhotoUrl,
           displayName: review.reviewer.displayName,
-          isAnonymous: review.reviewer.isAnonymous,
-          rating: review.starRating,
-          comment: review.comment ? review.comment.comment : null,
+          isAnonymous: review.reviewer.isAnonymous ?? false,
+          rating: ratingToNumber(review.starRating),
+          comment: review.comment ? review.comment : null,
           createTime: new Date(review.createTime),
         },
       });
@@ -73,5 +133,5 @@ export async function fetchGoogleReview() {
     await removeOldestReviews(reviewCount - 20);
   }
 
-  return response.data;
+  return { status: 200, msg: 'success' };
 }
