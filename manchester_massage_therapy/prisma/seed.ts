@@ -1,5 +1,4 @@
 import { GoogleReview, IGPost, Practitioner, PrismaClient, Therapy } from "@prisma/client"
-import { randomInt } from "crypto"
 
 const prisma = new PrismaClient()
 
@@ -71,9 +70,9 @@ async function main() {
     await addIGPost({
       uid: i.toString(),
       caption: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ornare dolor, sed dignissim ex aliquam vitae. Nam facilisis vitae nisl nec semper. Nullam non enim sit amet diam vulputate fermentum eget ac quam. Praesent euismod dui eu mi suscipit venenatis. Nulla maximus ipsum sagittis justo tincidunt viverra eget cursus mi. Suspendisse a purus nunc. Sed ac posuere nisl. Ut at dolor vel nunc rhoncus tempor facilisis id odio. Aliquam porttitor, ligula quis gravida condimentum, metus metus volutpat dolor, vitae tincidunt lacus lorem id sapien. Quisque sit amet gravida lectus, eget lobortis ipsum. Mauris faucibus placerat nisi vel pulvinar. Praesent ut sem in diam eleifend porttitor. Proin ac sagittis est.\n\nInterdum et malesuada fames ac ante ipsum primis in faucibus. In mollis elementum mauris, ornare malesuada dui congue vitae. Vivamus pretium lacus ac diam porttitor, eget ornare ipsum laoreet. Nunc turpis ipsum, luctus id feugiat sed, bibendum in sem. Maecenas ut tempor eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ipsum dolor, euismod molestie enim nec, cursus dapibus erat. ',
-      albumUrls: Array<string>(randomInt(1, 5)).fill('https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-15/341191084_178486428386706_877512343705402209_n.jpg?stp=dst-jpg_e15&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=106&_nc_ohc=GnDddeC81PsAX-gSrEI&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzA4Mjg4NzIwNDczMjE5Njc2Ng%3D%3D.2-ccb7-5&oh=00_AfBN5f9wlzkHomzVJ6X3rPvMjNwrHrxx2paAW0hi-PfXLQ&oe=6562BB80&_nc_sid=ee9879'),
+      albumUrls: Array<string>(Math.round(Math.random() * 4 + 1)).fill('https://scontent-lhr8-2.cdninstagram.com/v/t51.2885-15/341191084_178486428386706_877512343705402209_n.jpg?stp=dst-jpg_e15&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyIn0&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=106&_nc_ohc=GnDddeC81PsAX-gSrEI&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzA4Mjg4NzIwNDczMjE5Njc2Ng%3D%3D.2-ccb7-5&oh=00_AfBN5f9wlzkHomzVJ6X3rPvMjNwrHrxx2paAW0hi-PfXLQ&oe=6562BB80&_nc_sid=ee9879'),
       uploadDate: new Date(2001, 9, 11, 11, 59, 59, 0),
-      prefAspectRatio: randomInt(40, 100) / 100,
+      prefAspectRatio: Math.random() + 0.5,
       postUrl: 'https://www.instagram.com/p/CrInZQwqNee/'
     })
   }
@@ -84,7 +83,7 @@ async function main() {
       profilePhotoUrl: '/blankProfile.jpg',
       displayName: 'John Doe',
       isAnonymous: false,
-      rating: randomInt(3, 5),
+      rating: Math.round(Math.random() * 2 + 3),
       comment: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ornare dolor, sed dignissim ex aliquam vitae. Nam facilisis vitae nisl nec semper. Nullam non enim sit amet diam vulputate fermentum eget ac quam. Praesent euismod dui eu mi suscipit venenatis. Nulla maximus ipsum sagittis justo tincidunt viverra eget cursus mi. Suspendisse a purus nunc. Sed ac posuere nisl. Ut at dolor vel nunc rhoncus tempor facilisis id odio. Aliquam porttitor, ligula quis gravida condimentum, metus metus volutpat dolor, vitae tincidunt lacus lorem id sapien. Quisque sit amet gravida lectus, eget lobortis ipsum. Mauris faucibus placerat nisi vel pulvinar. Praesent ut sem in diam eleifend porttitor. Proin ac sagittis est.\n\nInterdum et malesuada fames ac ante ipsum primis in faucibus. In mollis elementum mauris, ornare malesuada dui congue vitae. Vivamus pretium lacus ac diam porttitor, eget ornare ipsum laoreet. Nunc turpis ipsum, luctus id feugiat sed, bibendum in sem. Maecenas ut tempor eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ipsum dolor, euismod molestie enim nec, cursus dapibus erat. ',
       createTime: new Date(2001, 9, 11, 11, 59, 59, 0),
     })

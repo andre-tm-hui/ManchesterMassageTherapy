@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import TreatmentCard from './TreatmentCard';
 import Carousel from '@/app/_components/shared/carousel';
 import Overlay from '@/app/_components/shared/widgets/Overlay';
@@ -11,24 +8,12 @@ interface TherapyCarouselProps {
 }
 
 export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
-  const [flipped, setFlipped] = useState(
-    new Array<boolean>(cards.length).fill(false)
-  );
-
-  const flipCard = (idx: number) => {
-    const newFlipped = new Array<boolean>(cards.length).fill(false);
-    newFlipped[idx] = true;
-    setFlipped(newFlipped);
-  };
-
   const cardComponents = cards.map((c, idx) => {
     return (
       <TreatmentCard
-        className='mr-5 flex-[0_0_16em] md:mr-0 md:flex-[0_0_20em]'
+        className='mr-5 flex-[0_0_22em] md:mr-0'
         key={c.uid}
         {...c}
-        flipped={flipped[idx]}
-        onClick={(_) => flipCard(idx)}
       ></TreatmentCard>
     );
   });
@@ -39,7 +24,7 @@ export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
         {cardComponents}
       </div>
       <Carousel
-        className='w-full max-w-3xl md:hidden md:max-w-none'
+        className='w-full max-w-3xl overflow-visible md:hidden md:max-w-none'
         axis='x'
         autoplay={true}
         loop={true}
@@ -51,10 +36,10 @@ export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
         style={{
           background: `linear-gradient(
               90deg, 
-              var(--bg-primary-color) 5%, 
-              rgba(0, 0, 0, 0) 25%, 
-              rgba(0, 0, 0, 0) 75%, 
-              var(--bg-primary-color) 95%
+              var(--bg-primary-color) 0%, 
+              rgba(0, 0, 0, 0) 20%, 
+              rgba(0, 0, 0, 0) 80%, 
+              var(--bg-primary-color) 100%
             )`,
         }}
       />

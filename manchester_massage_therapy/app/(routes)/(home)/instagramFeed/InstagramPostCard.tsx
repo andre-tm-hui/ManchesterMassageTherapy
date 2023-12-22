@@ -28,7 +28,7 @@ export default function InstagramPostCard({
     <div
       className='relative mb-4 cursor-default bg-black text-gray-200 shadow-md shadow-card transition-all duration-100 selection:bg-transparent hover:scale-[101%] hover:text-gray-200 hover:saturate-100 md:text-gray-500 md:saturate-50'
       style={{
-        aspectRatio: parseInt(uid) > 0 ? prefAspectRatio : 0.7,
+        aspectRatio: parseInt(uid) > 0 ? prefAspectRatio : Math.random() + 0.5,
       }}
     >
       <ConditionalWrapper

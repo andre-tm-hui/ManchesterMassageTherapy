@@ -36,7 +36,9 @@ export default function ReviewCard({
       </div>
       <div className='flex h-full flex-row items-center justify-center'>
         {SpeechMark(false)}
-        <p className='line-clamp-[7] text-center md:line-clamp-5'>{comment}</p>
+        <p className='line-clamp-[7] w-full text-center md:line-clamp-5'>
+          {comment}
+        </p>
         {SpeechMark(true)}
       </div>
     </div>

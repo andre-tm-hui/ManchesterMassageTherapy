@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 
+// TODO: add timeout based on IP? captcha? just to prevent spam
 export const dynamic = 'force-dynamic'
 
 const transporter = nodemailer.createTransport({
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
       from: "Manchester Massage Therapy <support@manchestermassagetherapy.co.uk>",
       to: process.env.EMAIL_USERNAME,
       subject: `New message from ${name}: ${subject}`,
-      text: `Name: ${name} \n Email: ${email} \n Phone: ${phone ?? 'N/A'} \n Message: ${message}`
+      text: `Name: ${name} \nEmail: ${email} \nPhone: ${phone ?? 'N/A'} \nMessage: ${message}`
     }, (error, info) => {
       if (error) {
         console.error(error);
