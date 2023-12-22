@@ -92,8 +92,10 @@ export default function Contact() {
         <HeaderAndComment className='m-auto max-w-5xl' title='Contact Us'>
           Questions about the service? Not sure what you need? Use the form
           below, or call us at{' '}
-          <span className='text-accent brightness-150'>+44 7748 010179</span>,
-          and let us know how we can help!
+          <a className='text-accent brightness-150' href='tel:07748010179'>
+            +44 7748 010179
+          </a>
+          , and let us know how we can help!
         </HeaderAndComment>
       </AccentSection>
 
