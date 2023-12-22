@@ -7,13 +7,14 @@ import BookingButton from '@/app/_components/shared/widgets/BookingButton';
 import SecondarySection from '@/app/_components/shared/section/SecondarySection';
 import { prisma } from '@/libs/prisma';
 import TreatmentCard from '../(home)/services/TreatmentCard';
+import FadeToFooter from '@/app/_components/shared/widgets/FadeToFooter';
 
 export default async function ServicesAndPricing() {
   const therapies = await prisma.therapy.findMany();
 
   return (
     <div className='flex flex-col justify-center'>
-      <AccentSection className='mt-12'>
+      <SecondarySection className='mt-12'>
         <HeaderAndComment
           className='m-auto max-w-5xl'
           title='Services & Packages'
@@ -22,9 +23,9 @@ export default async function ServicesAndPricing() {
           one-off massage to a monthly subscription, we have something for
           everyone.
         </HeaderAndComment>
-      </AccentSection>
+      </SecondarySection>
 
-      <PrimarySection className='mx-auto flex max-w-6xl flex-col'>
+      <AccentSection className='mx-auto flex max-w-6xl flex-col'>
         <div className='mx-auto w-full items-center px-4 text-center md:px-0'>
           <h1
             className={`${chelseaMarket.className} m-auto w-min text-5xl text-secondary md:text-7xl`}
@@ -64,13 +65,23 @@ export default async function ServicesAndPricing() {
           </div>
         </div>
         <BookingButton className='mx-auto my-6 px-20 py-4' />
-      </PrimarySection>
+      </AccentSection>
 
-      <SecondarySection className='xs:grid-cols-2 mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
-        {therapies.map((therapy) => (
-          <TreatmentCard key={therapy.uid} {...therapy} />
-        ))}
-      </SecondarySection>
+      <PrimarySection className='mx-auto flex max-w-6xl flex-col'>
+        <div className='mx-auto w-full items-center px-4 text-center md:px-0'>
+          <h1
+            className={`${chelseaMarket.className} m-auto text-5xl text-secondary md:text-7xl`}
+          >
+            All our Therapies
+          </h1>
+        </div>
+        <div className='mx-auto grid w-full max-w-6xl grid-cols-1 justify-center gap-6 px-6 md:grid-cols-2 lg:grid-cols-3'>
+          {therapies.map((therapy) => (
+            <TreatmentCard key={therapy.uid} className='w-full' {...therapy} />
+          ))}
+        </div>
+      </PrimarySection>
+      <FadeToFooter />
     </div>
   );
 }
