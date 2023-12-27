@@ -16,6 +16,10 @@ const footerItems = [
   {
     title: 'Interested in Helping?',
     links: [
+      {
+        href: 'https://g.page/r/CX4lATOKvrydEBM/review',
+        text: 'Leave a Review',
+      },
       //{ href: '/careers', text: 'Join the Team' },
       {
         href: '/contact?subject=Business Inquiries',
@@ -28,7 +32,7 @@ const footerItems = [
     links: [
       { href: '/faq', text: 'FAQ' },
       { href: '/contact', text: 'Contact Us' },
-      { href: '/sitemap', text: 'Sitemap' },
+      { href: '/sitemap.xml', text: 'Sitemap' },
     ],
   },
 ];

@@ -31,7 +31,7 @@ export default function PlaceholderReviewCard({
         {SpeechMark(false)}
         <div className='h-24 w-full rounded-lg bg-primary text-center'>
           <Hyperlink
-            href='/'
+            href='https://g.page/r/CX4lATOKvrydEBM/review'
             className={`mx-auto mt-2 text-2xl text-secondary ${chelseaMarket.className}`}
           >
             Leave a review!
