@@ -2,6 +2,7 @@ import TreatmentCard from './TreatmentCard';
 import Carousel from '@/app/_components/shared/carousel';
 import Overlay from '@/app/_components/shared/widgets/Overlay';
 import { Therapy } from '@prisma/client';
+import EndCard from './EndCard';
 
 interface TherapyCarouselProps {
   cards: Therapy[];
@@ -22,6 +23,7 @@ export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
     <div className='relative w-full'>
       <div className='mx-auto hidden max-w-6xl flex-row flex-wrap justify-center gap-6 md:flex'>
         {cardComponents}
+        <EndCard className='mr-5 flex-[0_0_22em] md:mr-0' />
       </div>
       <Carousel
         className='w-full max-w-3xl overflow-visible md:hidden md:max-w-none'
@@ -30,6 +32,7 @@ export default function TherapyCarousel({ cards }: TherapyCarouselProps) {
         loop={true}
       >
         {cardComponents}
+        <EndCard className='mr-5 flex-[0_0_22em] md:mr-0' />
       </Carousel>
       <Overlay
         className='block md:hidden'
