@@ -5,6 +5,8 @@ import ReviewCard from '@/app/(routes)/(home)/reviews/review/ReviewCard';
 import PrimarySection from '@/app/_components/shared/section/PrimarySection';
 import { chelseaMarket } from '@/app/fonts';
 import { prisma } from '@/libs/prisma';
+import NoScrollLink from '@/app/_components/shared/widgets/NoScrollLink';
+import StyledLink from '@/app/_components/shared/widgets/StyledLink';
 
 export default async function Reviews() {
   let googleReviews = await prisma.googleReview
@@ -27,6 +29,9 @@ export default async function Reviews() {
           Why Us?
         </h1>
         <p>See what our customers have to say!</p>
+        <StyledLink href='https://www.google.com/maps/place/Manchester+Massage+Therapy/@53.4722454,-2.2234628,12z/data=!4m6!3m5!1s0x44f81a7c982ec701:0x9dbcbe8a3301257e!8m2!3d53.4722454!4d-2.2234628!16s%2Fg%2F11vjxfphhx?hl=en-GB&entry=ttu'>
+          See more
+        </StyledLink>
       </div>
       <div className='relative h-[50vh] w-full md:my-[-6rem] md:h-[32rem] md:max-w-2xl'>
         <Carousel

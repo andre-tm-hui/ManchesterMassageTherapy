@@ -2,10 +2,9 @@ import PractitionerCard from '../PractitionerCard';
 import { chelseaMarket } from '@/app/fonts';
 import Carousel from '@/app/_components/shared/carousel';
 import AccentSection from '@/app/_components/shared/section/AccentSection';
-import Hyperlink from '@/app/_components/shared/widgets/Hyperlink';
-import ArrowSVG from '@/public/arrow.svg';
 import PlaceholderPractitionerCard from '../PlaceholderPractitionerCard';
 import { Practitioner } from '@prisma/client';
+import StyledLink from '@/app/_components/shared/widgets/StyledLink';
 
 export default function Team({
   practitioners,
@@ -41,10 +40,9 @@ export default function Team({
           Meet the Team!
         </h1>
         <p>Trained professionals, keeping your needs a priority.</p>
-        <Hyperlink className='w-40' href='/team'>
-          <div>See everyone</div>
-          <ArrowSVG width='2rem' height='2rem' />
-        </Hyperlink>
+        <StyledLink href='/team' className='w-40'>
+          See everyone
+        </StyledLink>
       </div>
       <div className='w-full max-w-6xl md:w-[55%]'>
         <Carousel
