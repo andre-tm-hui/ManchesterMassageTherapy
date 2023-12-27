@@ -2,7 +2,6 @@ import { chelseaMarket } from '@/app/fonts';
 import { Therapy } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
-import { isMobile } from 'react-device-detect';
 
 export default function TreatmentCard({
   className,
@@ -19,7 +18,7 @@ export default function TreatmentCard({
     'transition-all',
     'duration-500',
     '[transform-style:preserve-3d]',
-    'group-hover:[transform:rotateY(180deg)]',
+    'group-hover:[transform:rotateY(-180deg)]',
   ];
 
   return (
@@ -39,6 +38,14 @@ export default function TreatmentCard({
           >
             Hello
           </h1>
+          <div className='absolute bottom-0 right-0 h-[15%] w-[15%]'>
+            <Image
+              className='absolute bottom-0 right-0'
+              fill
+              src='/assets/services/cornerFold.png'
+              alt=''
+            />
+          </div>
         </div>
 
         <div className='absolute inset-0 h-full w-full text-center shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]'>
